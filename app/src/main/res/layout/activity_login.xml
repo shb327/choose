@@ -35,8 +35,10 @@
         android:id="@+id/textView2"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="sans-serif"
         android:text="Enter your login details to access your account"
+        android:textAlignment="center"
         android:textColor="#68B2A0"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/login_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -89,7 +91,6 @@
         android:elevation="5dp"
         android:textColor="#FFF"
         android:background="@drawable/login_button"
-        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
@@ -99,9 +100,11 @@
         android:id="@+id/textView3"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif"
         android:text="Also try log in with Google"
+        android:textAlignment="center"
         android:textColor="#68B2A0"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
