@@ -23,6 +23,7 @@
             app:layout_anchorGravity="bottom|center"
             app:backgroundTint= "#FFFFFF"
             app:contentInsetStart="0dp"
+
             app:elevation= "8dp">
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
