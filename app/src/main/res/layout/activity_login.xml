@@ -92,7 +92,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/login_button"
-        android:backgroundTint="@null"
+        app:backgroundTint="@null"
         android:elevation="5dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/log_in"
