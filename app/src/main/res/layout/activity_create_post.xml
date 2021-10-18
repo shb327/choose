@@ -112,7 +112,9 @@
             android:layout_marginLeft="18dp"
             android:layout_marginTop="150dp"
             android:fontFamily="@font/montserrat"
+            android:backgroundTint="#205072"
             android:text="Liked"
+            android:textColor="@color/white"
             app:cornerRadius="14dp"
             app:icon="@drawable/ic_round_like_24" />
 
@@ -123,6 +125,7 @@
             android:layout_marginLeft="142dp"
             android:layout_marginTop="150dp"
             android:backgroundTint="#329D9C"
+            android:textColor="@color/white"
             android:fontFamily="@font/montserrat"
             android:text="Saved"
             app:cornerRadius="14dp"
