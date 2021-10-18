@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-    android:id="@+id/search"
-    android:icon="@drawable/ic_search_24dp"
-    android:title="Search"
-    android:contentDescription="Search"
-    app:showAsAction="ifRoom"
-    />
+        android:id="@+id/home"
+        android:icon="@drawable/ic_round_home_24"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
 
     <item
-    android:id="@+id/more"
-    android:title="Search"
-    android:contentDescription="Search"
-    app:showAsAction="never"
+        android:id="@+id/communities"
+        android:icon="@drawable/ic_round_dashboard_24"
+        android:title="Communities"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/itemEmpty"
+        android:title=""/>
+
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/ic_round_notifications_24"
+        android:title="Notifications"
+        app:showAsAction="ifRoom"
+        />
+
+
+    <item
+    android:id="@+id/profile"
+    android:icon="@drawable/ic_round_person_24"
+    android:title="Profile"
+    app:showAsAction="ifRoom"
     />
 </menu>

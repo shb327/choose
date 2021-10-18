@@ -21,10 +21,19 @@
             android:layout_gravity="bottom"
             app:layout_anchor="@+id/nestedScrollView"
             app:layout_anchorGravity="bottom|center"
-            app:backgroundTint= "@color/white"
-            app:elevation= "8dp"
-            app:menu="@menu/bottom_app_bar"
-            app:navigationIcon="@drawable/ic_menu_24dp" />
+            app:backgroundTint= "#FFFFFF"
+            app:contentInsetStart="0dp"
+            app:elevation= "8dp">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNavigationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:labelVisibilityMode="unlabeled"
+                    app:itemIconTint="#CDE0C9"
+                    android:background="@drawable/background_transparent"
+                    app:menu="@menu/bottom_app_bar" />
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,3 +44,4 @@
             app:srcCompat="@drawable/ic_add_24dp"
             app:tint="#fff"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
