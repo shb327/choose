@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.choose.ChooseType;
 import com.example.choose.CreatePost;
 import com.example.choose.R;
 public class LoginActivity extends AppCompatActivity {

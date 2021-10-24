@@ -6,6 +6,23 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+        <!--        <View-->
+<!--            android:id="@+id/view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="187dp"-->
+<!--            android:background="@drawable/header"-->
+<!--            app:layout_anchor="@+id/nestedScrollView"-->
+<!--            app:layout_anchorGravity="top" />-->
+
+<!--        <com.github.mmin18.widget.RealtimeBlurView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="182dp"-->
+<!--            android:layout_marginHorizontal="50dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:elevation="10dp"-->
+<!--            app:realtimeBlurRadius="66dp"-->
+<!--            app:realtimeOverlayColor="#80FFFFFF" />-->
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
@@ -19,6 +36,33 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            app:layout_anchor="@+id/nestedScrollView"
+            app:layout_anchorGravity="top|center"
+            android:paddingTop="20dp"
+            app:tabSelectedTextColor="#205072"
+            app:tabTextColor="#329D9C">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posts" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comments" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discover" />
+        </com.google.android.material.tabs.TabLayout>
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -44,18 +88,22 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/gradient"
             app:layout_anchor="@id/bottomAppBar"
-            app:backgroundTint= "#56C596"
-            app:srcCompat="@drawable/ic_add_24dp"
-            app:tint="#fff"/>
+            app:maxImageSize="56dp"
+            app:rippleColor="@color/black"
+            app:tint="@null" />
+
+
 
         <View
             android:id="@+id/view"
             android:layout_width="wrap_content"
             android:layout_height="222dp"
-            android:background="@drawable/header"
+            android:background="@drawable/header2"
             app:layout_anchor="@+id/nestedScrollView"
             app:layout_anchorGravity="top" />
 
@@ -130,6 +178,31 @@
             android:text="Saved"
             app:cornerRadius="14dp"
             app:icon="@drawable/ic_icon_24" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="Nothing to display..."
+            android:textSize="16sp"
+            app:layout_anchor="@+id/nestedScrollView"
+            android:gravity="center"
+            android:textColor="#E0ECDE"
+            app:layout_anchorGravity="center" />
+
+        <!--        <View-->
+<!--            android:id="@+id/block"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="182dp"-->
+<!--            android:layout_marginHorizontal="50dp"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:elevation="10dp"-->
+<!--            android:background="@drawable/you_block"-->
+<!--            app:layout_anchor="@+id/nestedScrollView"-->
+<!--            app:layout_anchorGravity="top" />-->
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
