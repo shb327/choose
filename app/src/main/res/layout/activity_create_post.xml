@@ -179,17 +179,11 @@
             app:cornerRadius="14dp"
             app:icon="@drawable/ic_icon_24" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="Nothing to display..."
-            android:textSize="16sp"
-            app:layout_anchor="@+id/nestedScrollView"
-            android:gravity="center"
-            android:textColor="#E0ECDE"
-            app:layout_anchorGravity="center" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/content_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="391dp"
+            android:layout_marginTop="280dp" />
 
         <!--        <View-->
 <!--            android:id="@+id/block"-->
