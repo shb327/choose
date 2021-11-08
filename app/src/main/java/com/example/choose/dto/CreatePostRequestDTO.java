@@ -1,21 +1,21 @@
 package com.example.choose.dto;
 
 public class CreatePostRequestDTO {
-    private Long id;
+    private String content;
 
     private String title;
 
-    public CreatePostRequestDTO(Long id, String title) {
-        this.id = id;
+    public CreatePostRequestDTO(String content, String title) {
+        this.content = content;
         this.title = title;
     }
 
-    public Long getId() {
-        return id;
+    public String getContent() {
+        return content;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getTitle() {

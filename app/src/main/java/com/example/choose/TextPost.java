@@ -28,7 +28,7 @@ public class TextPost extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             PostService.getInstance()
-                    .createPost(Long.valueOf(editText1.getText().toString()),
+                    .createPost(editText1.getText().toString(),
                                 editText2.getText().toString())
             .enqueue(new Callback<Long>() {
                 @Override

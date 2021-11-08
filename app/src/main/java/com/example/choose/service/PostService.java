@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostService {
     private static PostService INSTANCE;
-    private final static String BASE_URL = "http://192.168.0.106:8080";
+    private final static String BASE_URL = "http://10.0.2.2:8080";
     private final PostServiceApi api;
     private final Retrofit retrofit;
 
@@ -30,7 +30,7 @@ public class PostService {
         return INSTANCE;
     }
 
-    public Call<Long> createPost(Long id, String title) {
+    public Call<Long> createPost(String id, String title) {
         return api.createPost(new CreatePostRequestDTO(id, title));
     }
 
