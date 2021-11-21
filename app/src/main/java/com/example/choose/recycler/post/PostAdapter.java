@@ -49,7 +49,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         PostDTO post = localDataSet.get(position);
-        viewHolder.getTextView().setText(post.getId() + ": "+post.getTitle());
+        viewHolder.getTextView().setText(post.getTitle());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

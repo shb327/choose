@@ -15,12 +15,14 @@ import android.os.Bundle;
 import android.text.BoringLayout;
 import android.text.Layout;
 import android.text.TextPaint;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 
 public class ChooseType extends AppCompatActivity {
@@ -34,12 +36,24 @@ public class ChooseType extends AppCompatActivity {
 
         MaterialCardView materialCardView = findViewById(R.id.card1);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
+
         materialCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseType.this, TextPost.class));
             }
         });
+
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(ChooseType.this, CreatePost.class));
+                return false;
+            }
+        });
+
 
 
     }

@@ -1,14 +1,22 @@
 package com.example.choose;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.choose.service.PostService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +33,9 @@ public class TextPost extends AppCompatActivity {
         Button button = findViewById(R.id.sendBtn);
         EditText editText1 = findViewById(R.id.titleTxt);
         EditText editText2 = findViewById(R.id.contentTxt);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
 
         button.setOnClickListener(v -> {
             PostService.getInstance()
@@ -62,6 +73,14 @@ public class TextPost extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
 //                });
+        });
+
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(TextPost.this, CreatePost.class));
+                return false;
+            }
         });
     }
 }

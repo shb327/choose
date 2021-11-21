@@ -3,6 +3,7 @@ package com.example.choose;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.os.Bundle;
 import com.example.choose.dto.PostDTO;
 import com.example.choose.recycler.post.PostAdapter;
 import com.example.choose.service.PostService;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -35,6 +38,17 @@ public class CreatePost extends AppCompatActivity {
         FloatingActionButton btn2 = findViewById(R.id.fab_start);
 
         btn2.setOnClickListener(v -> startActivity(new Intent(CreatePost.this, ChooseType.class)));
+
+        BottomAppBar bar = findViewById(R.id.bottomAppBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
+        bottomNavigationView.setSelectedItemId(R.id.profile);
+
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
+
+        item.setIcon(R.drawable.ic_baseline_person_24);
+        item.setEnabled(true);
 
         RecyclerView contentView = findViewById(R.id.content_recycle_view);
         contentView.setLayoutManager(new LinearLayoutManager(this));
