@@ -34,15 +34,23 @@ public class ChooseType extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_type);
 
-        MaterialCardView materialCardView = findViewById(R.id.card1);
+        MaterialCardView materialCardView1 = findViewById(R.id.card1);
+        MaterialCardView materialCardView2 = findViewById(R.id.card2);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
 
-        materialCardView.setOnClickListener(new View.OnClickListener() {
+        materialCardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseType.this, TextPost.class));
+            }
+        });
+
+        materialCardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChooseType.this, ImagePost.class));
             }
         });
 
