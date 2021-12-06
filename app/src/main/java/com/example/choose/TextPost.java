@@ -48,40 +48,16 @@ public class TextPost extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request builder = chain
-                        .request()
-                        .newBuilder()
-                        .addHeader("Authorization", "basic dGVzdDp0ZXN0")
-                        .build();
-                return chain.proceed(builder);
-            }
-        }).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://choose.teheidoma.com/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .client(okHttpClient)
-                        .build();
-
-        PostController postController = retrofit.create(PostController.class);
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(TextPost.this, CreatePost.class));
-                return false;
-            }
+        PostController postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
+        item.setOnMenuItemClickListener(item1 -> {
+            startActivity(new Intent(TextPost.this, CreatePost.class));
+            return false;
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postController.createPost(
-                        new CreatePostRequestDTO(
-                                editText2.getText().toString(),editText1.getText().toString()))
+        button.setOnClickListener(v ->
+                postController.createPost(new CreatePostRequestDTO(
+                                                                    editText2.getText().toString(),
+                                                                    editText1.getText().toString()))
                         .enqueue(new Callback<PostDTO>() {
                             @Override
                             public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
@@ -92,8 +68,6 @@ public class TextPost extends AppCompatActivity {
                             public void onFailure(Call<PostDTO> call, Throwable t) {
                                 Toast.makeText(TextPost.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        });
-            }
-        });
+                        }));
     }
 }

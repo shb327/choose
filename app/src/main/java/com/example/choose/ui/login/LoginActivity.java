@@ -2,15 +2,20 @@ package com.example.choose.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.choose.ChooseType;
 import com.example.choose.CreatePost;
 import com.example.choose.R;
+import com.example.choose.RetrofitUtils;
+import com.example.choose.api.LoginController;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
