@@ -34,9 +34,8 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Log.i("post", response.raw().request().headers().toString());
                             if (response.code() == 200) {
-//                                Log.i("test", response.headers().toString());
-//                                String session = response.headers().get("Cookie").split("=")[1];
-//                                RetrofitUtils.getInstance().createRetrofit(session);
+                                String cookie = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+                                RetrofitUtils.getInstance().createRetrofit(cookie);
                                 startActivity(new Intent(LoginActivity.this, CreatePost.class));
                             } else {
                                 //TODO
