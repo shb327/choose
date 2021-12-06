@@ -18,13 +18,32 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btn = (Button)findViewById(R.id.login_button);
+        Button btn = findViewById(R.id.login_button);
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        LoginController controller = RetrofitUtils.getInstance().getRetrofit().create(LoginController.class);
+        btn.setOnClickListener(v -> {
+            controller.login(email.getText().toString(), password.getText().toString())
+                    .enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.i("post", response.raw().request().headers().toString());
+                            if (response.code() == 200) {
+//                                Log.i("test", response.headers().toString());
+//                                String session = response.headers().get("Cookie").split("=")[1];
+//                                RetrofitUtils.getInstance().createRetrofit(session);
+                                startActivity(new Intent(LoginActivity.this, CreatePost.class));
+                            } else {
+                                //TODO
+                                Toast.makeText(LoginActivity.this, "Invalid credential", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CreatePost.class));
-            }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.e("Login Error", t.getMessage(), t);
+                        }
+                    });
         });
     }
 }

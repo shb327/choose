@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Choose"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".VotingScreen"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />

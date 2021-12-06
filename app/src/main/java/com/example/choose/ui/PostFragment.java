@@ -62,19 +62,19 @@ public class PostFragment extends Fragment{
                 .client(okHttpClient)
                 .build();
 
-        PostController postController = retrofit.create(PostController.class);
-
-        AsyncTask.execute(() -> {
-            postController
-                    .getFeed(new GetFeedRequestDTO(0,0,10))
-                    .enqueue(new Callback<GetFeedResponseDTO>() {
-                        @Override
-                        public void onResponse(Call<GetFeedResponseDTO> call, Response<GetFeedResponseDTO> response) {
-                            if (response.isSuccessful()) {
-                                adapter.localDataSet.addAll(response.body().getPosts());
-                                adapter.notifyDataSetChanged();
-                            }
+        postController
+                .getFeed(new GetFeedRequestDTO(0,0,10))
+                .enqueue(new Callback<GetFeedResponseDTO>() {
+                    @Override
+                    public void onResponse(Call<GetFeedResponseDTO> call, Response<GetFeedResponseDTO> response) {
+                        if (response.isSuccessful()) {
+                            adapter.localDataSet.addAll(response.body().getPosts());
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Log.e("post", String.valueOf(response.code()));
+                            Log.e("post", response.raw().toString());
                         }
+                    }
 
                         @Override
                         public void onFailure(Call<GetFeedResponseDTO> call, Throwable t) {
