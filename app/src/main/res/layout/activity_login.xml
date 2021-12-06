@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,15 +37,12 @@
         android:id="@+id/textView2"
         android:layout_width="201dp"
         android:layout_height="43dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat"
         android:text="Enter your login details to access your account"
-        android:textAlignment="center"
         android:textColor="#68B2A0"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -87,8 +84,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="256dp"
+        android:layout_height="54dp"
+        android:textSize="18sp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
