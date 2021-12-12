@@ -23,15 +23,13 @@ public class PostFragment extends Fragment{
     private final PostAdapter adapter = new PostAdapter();
     private RecyclerView recyclerView;
 
-    public PostFragment() {
-        // Required empty public constructor
-    }
+    public PostFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PostController postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
-
+        
         postController
                 .getFeed(new GetFeedRequestDTO(0,0,10))
                 .enqueue(new Callback<GetFeedResponseDTO>() {

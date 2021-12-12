@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable-v24/login_button.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/drawable-v24/test.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/drawable-xhdpi/header2.xml" value="0.34035087719298246" />
+        <entry key="app/src/main/res/drawable/add_option.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/background_transparent.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/button_bg_round.xml" value="0.1986842105263158" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.25" />
@@ -27,10 +28,12 @@
         <entry key="app/src/main/res/drawable/ic_menu_24dp.xml" value="0.23055555555555557" />
         <entry key="app/src/main/res/drawable/ic_round_add.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/drawable/ic_round_add_24.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/drawable/ic_round_add_circle_outline_24.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_circle_right_24.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_circle_up_24.xml" value="0.3359307359307359" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_upward_24.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/ic_round_camera_alt_24.xml" value="0.25276872964169383" />
+        <entry key="app/src/main/res/drawable/ic_round_close_24.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/ic_round_cloud_upload_24.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/ic_round_dashboard_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_round_person_24.xml" value="0.4041666666666667" />
@@ -43,7 +46,7 @@
         <entry key="app/src/main/res/layout-v21/activity_login.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_choose_type.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_image_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_image_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24645225407075097" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31491228070175437" />
         <entry key="app/src/main/res/layout/activity_regisrtation_username.xml" value="0.2361842105263158" />
@@ -56,6 +59,8 @@
         <entry key="app/src/main/res/layout/activity_starting.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_text_post.xml" value="0.3267543859649123" />
         <entry key="app/src/main/res/layout/activity_text_post2.xml" value="0.28556806550665303" />
+        <entry key="app/src/main/res/layout/activity_voting_post.xml" value="0.2450657894736842" />
+        <entry key="app/src/main/res/layout/activity_voting_screen.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/layout/content_text_post.xml" value="0.3267543859649123" />
         <entry key="app/src/main/res/layout/fragment_comments.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/layout/fragment_discover.xml" value="0.2450657894736842" />
@@ -64,6 +69,7 @@
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.3267543859649123" />
         <entry key="app/src/main/res/layout/item_post.xml" value="0.1850877192982456" />
+        <entry key="app/src/main/res/layout/row.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/layout/text_row_item.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.3267543859649123" />

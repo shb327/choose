@@ -41,6 +41,7 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/bottomAppBar"
@@ -48,22 +49,62 @@
         android:src ="@drawable/gradient"
         app:tint="@null"/>
 
-    <EditText
-        android:id="@+id/contentTxt"
+    <LinearLayout
+        android:id="@+id/options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
-        android:backgroundTint="@android:color/transparent"
-        android:ems="16"
-        android:fontFamily="@font/montserrat"
-        android:hint="Add description"
-        android:inputType="textMultiLine|textAutoCorrect"
-        android:textColor="#68B2A0"
-        android:textColorHint="#68B2A0"
+        android:layout_marginTop="180dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/sendBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_anchor="@+id/titleTxt"
+        app:layout_anchorGravity="bottom|center"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/textin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="#68B2A0"
+                android:drawableRight="@drawable/ic_round_close_24"
+                android:ems="16"
+                android:fontFamily="@font/montserrat"
+                android:hint="Option"
+                android:inputType="textAutoCorrect"
+                android:textColor="#68B2A0"
+                android:textColorHint="#68B2A0" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingTop="6dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add"
+                style="@style/Widget.App.Button.OutlinedButton.Icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:icon="@drawable/ic_round_add_24"
+                app:iconGravity="textStart"
+                app:iconSize="24dp"
+                app:iconTint="#68B2A0"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                app:strokeColor="#68B2A0" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
 
     <EditText
         android:id="@+id/titleTxt"
@@ -111,11 +152,9 @@
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center_horizontal"
             android:paddingLeft="14dp"
-            android:text="Text Post"
+            android:text="Voting Post"
             android:textColor="#205072"
             android:textSize="24dp" />
-
-<!--        @drawable/ic_round_arrow_circle_right_24-->
 
         <Button
             android:id="@+id/sendBtn"
@@ -131,11 +170,5 @@
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             />
-
-
-
-
     </com.google.android.material.appbar.MaterialToolbar>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,10 +5,12 @@ import java.util.Objects;
 public class PostDTO {
     private Long id;
     private String title;
+    private String type;
 
-    public PostDTO(Long id, String title) {
+    public PostDTO(Long id, String title, String type) {
         this.id = id;
         this.title = title;
+        this.type = type;
     }
 
     public PostDTO() {
@@ -25,8 +27,14 @@ public class PostDTO {
     public String getTitle() {
         return title;
     }
-    
-    
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public void setTitle(String title) {
         this.title = title;

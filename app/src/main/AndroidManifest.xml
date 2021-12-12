@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Choose"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".VotingScreen"
+            android:name=".VotingPost"
             android:exported="false" />
 
         <meta-data

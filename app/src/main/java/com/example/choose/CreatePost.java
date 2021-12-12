@@ -73,51 +73,6 @@ public class CreatePost extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
         setupViewPager(viewPager);
-
-
-//        RecyclerView contentView = findViewById(R.id.content_recycle_view);
-//        contentView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new PostAdapter();
-//        contentView.setAdapter(adapter);
-//
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-//            @Override
-//            public okhttp3.Response intercept(Chain chain) throws IOException {
-//                Request builder = chain
-//                        .request()
-//                        .newBuilder()
-//                        .addHeader("Authorization", "basic dGVzdDp0ZXN0")
-//                        .build();
-//                return chain.proceed(builder);
-//            }
-//        }).build();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://choose.teheidoma.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(okHttpClient)
-//                .build();
-//
-//        PostController postController = retrofit.create(PostController.class);
-//
-//        AsyncTask.execute(() -> {
-//            postController
-//                    .getFeed(new GetFeedRequestDTO(0,0,10))
-//                    .enqueue(new Callback<GetFeedResponseDTO>() {
-//                        @Override
-//                        public void onResponse(Call<GetFeedResponseDTO> call, Response<GetFeedResponseDTO> response) {
-//                            if (response.isSuccessful()) {
-//                                adapter.localDataSet.addAll(response.body().getPosts());
-//                                adapter.notifyDataSetChanged();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<GetFeedResponseDTO> call, Throwable t) {
-//                            Log.e("post", t.getMessage(), t);
-//                        }
-//                    });
-//        });
     }
 
     @Override
@@ -162,5 +117,4 @@ public class CreatePost extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
-
 }
