@@ -33,7 +33,7 @@ public class StartingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(StartingActivity.this, RegistrationUsername.class));
+                startActivity(new Intent(StartingActivity.this, Registration.class));
             }
         });
     }

@@ -13,6 +13,13 @@
         android:theme="@style/Theme.Choose"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Petition"
+            android:exported="false" />
+        <activity
+            android:name=".Registration"
+            android:exported="false"
+            android:theme="@style/Theme.ThemeOne" />
+        <activity
             android:name=".VotingPost"
             android:exported="false" />
 

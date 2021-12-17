@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.choose.dto.CreatePostRequestDTO;
 import com.example.choose.dto.PostDTO;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -47,6 +49,13 @@ public class VotingPost extends AppCompatActivity {
 
         FloatingActionButton btn2 = findViewById(R.id.fab_start);
         btn2.setOnClickListener(v -> startActivity(new Intent(VotingPost.this, ChooseType.class)));
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
+        item.setOnMenuItemClickListener(item1 -> {
+            startActivity(new Intent(VotingPost.this, CreatePost.class));
+            return false;
+        });
 
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, NUMBER);

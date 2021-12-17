@@ -45,8 +45,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class CreatePost extends AppCompatActivity {
-
-    private PostAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
