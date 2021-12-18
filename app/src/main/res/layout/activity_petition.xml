@@ -49,6 +49,19 @@
         android:src ="@drawable/gradient"
         app:tint="@null"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:text="Goal(optional):"
+        android:id="@+id/goalTxt"
+        android:layout_marginTop="496dp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="#68B2A0"
+        android:textSize="16sp"
+        />
+
+
     <EditText
         android:id="@+id/contentTxt"
         android:layout_width="wrap_content"
@@ -61,7 +74,7 @@
         android:inputType="textMultiLine|textAutoCorrect"
         android:textColor="#68B2A0"
         android:textColorHint="#68B2A0"
-        android:layout_marginTop="548dp"
+        android:layout_marginTop="582dp"
         app:layout_anchor="@+id/titleTxt"
         app:layout_anchorGravity="bottom|center"
         app:srcCompat="@drawable/ic_round_cloud_upload_24"/>
@@ -71,7 +84,7 @@
         android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="494dp"
+        android:layout_marginTop="530dp"
         app:trackColorActive="#68B2A0"
         app:trackColorInactive="#E0ECDE"
         app:haloColor="#68B2A0"
@@ -212,13 +225,6 @@
         app:layout_anchorGravity="end|top"
         app:strokeColor="#205072" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_anchor="@+id/nestedScrollView2"
-        app:layout_anchorGravity="center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

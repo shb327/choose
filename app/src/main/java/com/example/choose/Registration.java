@@ -55,7 +55,6 @@ public class Registration extends AppCompatActivity {
         });
 
         btn.setOnClickListener(v -> {
-//            startActivity(new Intent(Registration.this, CreatePost.class));
             //TMP
             controller.login("test", "test")
                     .enqueue(new Callback<Void>() {
@@ -78,8 +77,6 @@ public class Registration extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         pageIndicatorView.setViewPager(viewPager);
-//        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-//        tabLayout.setupWithViewPager(viewPager);
         setupViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

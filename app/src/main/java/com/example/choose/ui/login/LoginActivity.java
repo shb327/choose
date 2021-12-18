@@ -1,12 +1,16 @@
 package com.example.choose.ui.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.choose.CreatePost;
 import com.example.choose.R;
@@ -26,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.login_button);
         EditText email = findViewById(R.id.email);
         EditText password = findViewById(R.id.password);
+
+        TextView txt = findViewById(R.id.textView9);
+
         LoginController controller = RetrofitUtils.getInstance().getRetrofit().create(LoginController.class);
         btn.setOnClickListener(v -> {
             controller.login(email.getText().toString(), password.getText().toString())
@@ -38,8 +45,11 @@ public class LoginActivity extends AppCompatActivity {
                                 RetrofitUtils.getInstance().createRetrofit(cookie);
                                 startActivity(new Intent(LoginActivity.this, CreatePost.class));
                             } else {
-                                //TODO
-                                Toast.makeText(LoginActivity.this, "Invalid credential", Toast.LENGTH_SHORT).show();
+                                email.setTextColor(Color.parseColor("#F75010"));
+                                email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_highlight_off_24, 0);
+                                password.setTextColor(Color.parseColor("#F75010"));
+                                password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_highlight_off_24, 0);
+                                txt.setTextColor(Color.parseColor("#F75010"));
                             }
                         }
 
