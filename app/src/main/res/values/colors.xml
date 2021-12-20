@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_green">#68B2A0</color>
+    <color name="error">#F75010</color>
     <color name="mtrl_textinput_default_box_stroke_color">#56C596</color>
 </resources>

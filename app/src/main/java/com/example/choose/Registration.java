@@ -9,8 +9,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,10 @@ public class Registration extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    FirstStepFragment firstStepFragment;
+    SecondStepFragment secondStepFragment;
+    ThirdStepFragment thirdStepFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,10 @@ public class Registration extends AppCompatActivity {
         PageIndicatorView pageIndicatorView = findViewById(R.id.pageIndicatorView);
         pageIndicatorView.setCount(3);
         pageIndicatorView.setSelection(0);
+
+        firstStepFragment = new FirstStepFragment();
+        secondStepFragment = new SecondStepFragment();
+        thirdStepFragment = new ThirdStepFragment();
 
         Button btn = (Button)findViewById(R.id.next_one_btn);
         TextView txt = (TextView)findViewById(R.id.login_btn);
@@ -94,9 +104,9 @@ public class Registration extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         Registration.ViewPagerAdapter adapter = new Registration.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FirstStepFragment(), "Uno");
-        adapter.addFragment(new SecondStepFragment(), "Dos");
-        adapter.addFragment(new ThirdStepFragment(), "Tres");
+        adapter.addFragment(firstStepFragment, "Uno");
+        adapter.addFragment(secondStepFragment, "Dos");
+        adapter.addFragment(thirdStepFragment, "Tres");
         viewPager.setAdapter(adapter);
     }
 

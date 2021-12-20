@@ -36,6 +36,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/textView2"
+        app:counterMaxLength="20"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:fontFamily="@font/montserrat"

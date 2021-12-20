@@ -14,6 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="error_appearance_one" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
+    <style name="error_appearance_two" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/error</item>
+    </style>
 
     <style name="Theme.Choose.NoActionBar">
         <item name="windowActionBar">false</item>

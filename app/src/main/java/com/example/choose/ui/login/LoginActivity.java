@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView txt = findViewById(R.id.textView9);
 
+        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+
         LoginController controller = RetrofitUtils.getInstance().getRetrofit().create(LoginController.class);
         btn.setOnClickListener(v -> {
             controller.login(email.getText().toString(), password.getText().toString())
@@ -46,10 +52,15 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, CreatePost.class));
                             } else {
                                 email.setTextColor(Color.parseColor("#F75010"));
+                                email.setHintTextColor(Color.parseColor("#F75010"));
                                 email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_highlight_off_24, 0);
                                 password.setTextColor(Color.parseColor("#F75010"));
                                 password.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_round_highlight_off_24, 0);
+                                password.setHintTextColor(Color.parseColor("#F75010"));
                                 txt.setTextColor(Color.parseColor("#F75010"));
+                                txt.startAnimation(shake);
+                                email.startAnimation(shake);
+                                password.startAnimation(shake);
                             }
                         }
 

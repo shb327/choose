@@ -49,41 +49,83 @@
         android:src ="@drawable/gradient"
         app:tint="@null"/>
 
-    <EditText
-        android:id="@+id/contentTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="160dp"
-        android:backgroundTint="@android:color/transparent"
-        android:ems="16"
-        android:fontFamily="@font/montserrat"
-        android:hint="Add description"
-        android:inputType="textMultiLine|textAutoCorrect"
-        android:textColor="#68B2A0"
-        android:textColorHint="#68B2A0"
-        app:layout_constraintBottom_toTopOf="@+id/sendBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/titleTxt"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp"
-        android:ems="16"
-        android:fontFamily="@font/montserrat_bold"
-        android:hint="Add a title"
-        android:inputType="textPersonName"
-        app:layout_anchor="@+id/nestedScrollView2"
-        android:backgroundTint="#68B2A0"
-        android:textColorHint="#68B2A0"
-        android:textColor="#68B2A0"
         app:layout_anchorGravity="top|center"
-        app:layout_constraintBottom_toTopOf="@+id/contentTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_anchor="@+id/nestedScrollView2"
+        android:layout_marginTop="120dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleLayout"
+            android:layout_height="wrap_content"
+            android:layout_width="348dp"
+            android:layout_gravity="center_horizontal"
+            app:counterMaxLength="20"
+            android:hint="Add a title"
+            app:boxStrokeColor="#68B2A0"
+            android:textColor="#68B2A0"
+            android:textColorHint="#68B2A0"
+            app:errorTextColor="@color/error"
+            android:inputType="textAutoCorrect"
+            app:hintTextColor="#68B2A0"
+            app:boxStrokeErrorColor="#F75010"
+            app:errorIconTint="@color/error"
+            app:boxStrokeWidth="2dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleTxt"
+                android:ems="16"
+                android:textColor="#68B2A0"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLength="20" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="348dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="256"
+            android:hint="Add description"
+            android:inputType="textMultiLine|textAutoCorrect"
+            android:textColor="#68B2A0"
+            android:textColorHint="#68B2A0"
+            app:hintTextColor="#68B2A0"
+            app:layout_anchor="@id/titleLayout"
+            app:boxStrokeErrorColor="#F75010"
+            app:boxStrokeColor="#68B2A0"
+            app:boxStrokeWidth="2dp"
+            app:errorIconTint="@color/error"
+            app:errorTextColor="@color/error"
+            app:layout_anchorGravity="center|bottom"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:counterTextColor="@color/main_green"
+            app:layout_constraintTop_toBottomOf="@id/titleLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contentTxt"
+                android:ems="16"
+                android:minLines="3"
+                android:textSize="18sp"
+                android:gravity="top"
+                android:fontFamily="@font/montserrat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -103,7 +145,7 @@
             android:id="@+id/imageView4"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@drawable/vlad2" />
+            app:srcCompat="@drawable/vlad3" />
 
         <TextView
             android:id="@+id/textPost"
@@ -113,26 +155,25 @@
             android:gravity="center_horizontal"
             android:paddingLeft="14dp"
             android:text="Text Post"
-            android:textColor="#205072"
-            android:textSize="24dp" />
+            android:textColor="#68B2A0"
+            android:textSize="24sp" />
 
-<!--        @drawable/ic_round_arrow_circle_right_24-->
+        <!--        @drawable/ic_round_arrow_circle_right_24-->
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/sendBtn"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
             android:layout_marginLeft="152dp"
+            style="@style/Widget.App.Button.OutlinedButton.Icon"
+            android:backgroundTint="#68B2A0"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             app:icon="@drawable/ic_round_arrow_upward_24"
-            android:background="@drawable/button_bg_round"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
             app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            />
-
+            app:iconSize="24dp"
+            app:iconTint="#E0ECDE"
+            app:strokeWidth="2dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+            app:strokeColor="#68B2A0" />
 
 
 
