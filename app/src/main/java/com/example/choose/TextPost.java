@@ -2,16 +2,21 @@ package com.example.choose;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -101,7 +106,12 @@ public class TextPost extends AppCompatActivity {
             return false;
         });
 
-        button.setOnClickListener(v ->
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(titleLayout.isErrorEnabled() || editText1.getText().length()==0){
+                    return;
+                }
                 postController.createPost(new CreatePostRequestDTO(
                         editText2.getText().toString(),
                         editText1.getText().toString()))
@@ -115,6 +125,23 @@ public class TextPost extends AppCompatActivity {
                             public void onFailure(Call<PostDTO> call, Throwable t) {
                                 Toast.makeText(TextPost.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }));
+                        });
+            }
+        });
+
+//        button.setOnClickListener(v -> postController.createPost(new CreatePostRequestDTO(
+//                        editText2.getText().toString(),
+//                        editText1.getText().toString()))
+//                        .enqueue(new Callback<PostDTO>() {
+//                            @Override
+//                            public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
+//                                startActivity(new Intent(TextPost.this, CreatePost.class));
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<PostDTO> call, Throwable t) {
+//                                Toast.makeText(TextPost.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }));
     }
 }

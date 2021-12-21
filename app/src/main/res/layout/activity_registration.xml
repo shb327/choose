@@ -59,7 +59,7 @@
         android:background="@drawable/login_button"
         android:elevation="5dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="FINISH"
+        android:text="NEXT"
         android:textColor="#FFF"
         android:textSize="18sp"
         app:backgroundTint="@null"

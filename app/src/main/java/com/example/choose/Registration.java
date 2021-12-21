@@ -65,24 +65,31 @@ public class Registration extends AppCompatActivity {
         });
 
         btn.setOnClickListener(v -> {
-            //TMP
-            controller.login("test", "test")
-                    .enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.i("post", response.raw().request().headers().toString());
-                            if (response.code() == 200) {
-                                String cookie = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
-                                RetrofitUtils.getInstance().createRetrofit(cookie);
-                                startActivity(new Intent(Registration.this, CreatePost.class));
+            if(viewPager.getCurrentItem() == 0){
+                if(!firstStepFragment.isComplete()) return;
+                firstStepFragment.send(viewPager);
+            }else if(viewPager.getCurrentItem() == 1){
+                viewPager.setCurrentItem(2);
+                btn.setText("Finish");
+            }else if(viewPager.getCurrentItem() == 2){
+                controller.login("test", "test")
+                        .enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                Log.i("post", response.raw().request().headers().toString());
+                                if (response.code() == 200) {
+                                    String cookie = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+                                    RetrofitUtils.getInstance().createRetrofit(cookie);
+                                    startActivity(new Intent(Registration.this, CreatePost.class));
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Log.e("Login Error", t.getMessage(), t);
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Login Error", t.getMessage(), t);
+                            }
+                        });
+            }
         });
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -99,6 +106,13 @@ public class Registration extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {/*empty*/}
+        });
+
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
         });
     }
 

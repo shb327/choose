@@ -49,7 +49,6 @@ public class RetrofitUtils {
                             if (session != null) {
                                 builder.addHeader("Cookie", "JSESSIONID=" + session);
                             }
-
                             return chain.proceed(builder.build());
                         }).build())
                 .build();
