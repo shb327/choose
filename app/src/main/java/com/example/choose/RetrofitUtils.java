@@ -35,8 +35,7 @@ public class RetrofitUtils {
 
     public void updateRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.176:8080/")
-//                .baseUrl("https://choose.teheidoma.com/")
+                .baseUrl("https://choose.teheidoma.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()
                         .followRedirects(false)
