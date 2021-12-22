@@ -98,7 +98,7 @@ public class FirstStepFragment extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if(!hidden.getText().toString().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+                if(!hidden.getText().toString().matches("^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*[\\d])+)(?=(.*[\\W])+)(?!.*\\s).{8,}$")){
                     password.setErrorEnabled(true);
                     password.setError("Invalid Password");
                     hidden.setTextColor(Color.parseColor("#F75010"));

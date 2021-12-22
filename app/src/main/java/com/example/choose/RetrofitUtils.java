@@ -1,10 +1,17 @@
 package com.example.choose;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.choose.api.PostController;
 
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
@@ -17,6 +24,9 @@ public class RetrofitUtils {
 
     private static final RetrofitUtils INSTANCE = new RetrofitUtils();
     private Retrofit retrofit;
+    private String login;
+    private String password;
+
 
     private RetrofitUtils() {
     }
@@ -41,16 +51,37 @@ public class RetrofitUtils {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()
                         .followRedirects(false)
-                        .cookieJar(CookieJar.NO_COOKIES)
                         .addInterceptor(chain -> {
                             Request.Builder builder = chain
                                     .request()
                                     .newBuilder();
-                            if (session != null) {
-                                builder.addHeader("Cookie", "JSESSIONID=" + session);
+                            if (login != null && password != null) {
+                                builder.addHeader("Authorization", getAuthHeader());
                             }
                             return chain.proceed(builder.build());
                         }).build())
                 .build();
+    }
+
+    @SuppressLint("NewApi")
+    private String getAuthHeader() {
+        String value = login + ":" + password;
+        return "Basic "+ Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.US_ASCII));
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
