@@ -2,6 +2,7 @@ package com.example.choose;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,5 +37,6 @@ public class StartingActivity extends AppCompatActivity {
                 startActivity(new Intent(StartingActivity.this, Registration.class));
             }
         });
+        RetrofitUtils.getInstance().setAccountManager(AccountManager.get(this));
     }
 }

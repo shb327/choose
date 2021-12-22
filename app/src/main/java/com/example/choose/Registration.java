@@ -78,8 +78,6 @@ public class Registration extends AppCompatActivity {
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 Log.i("post", response.raw().request().headers().toString());
                                 if (response.code() == 200) {
-                                    String cookie = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
-                                    RetrofitUtils.getInstance().createRetrofit(cookie);
                                     startActivity(new Intent(Registration.this, CreatePost.class));
                                 }
                             }

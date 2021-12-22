@@ -9,6 +9,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RegistrationController {
-    @POST("/registration/username")
+    @POST("/api/registration/username")
     Call<Void> username(@Body RegistrationUsernameDTO registrationUsernameDTO);
 }

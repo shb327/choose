@@ -1,5 +1,7 @@
 package com.example.choose;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,5 +27,12 @@ public class ThirdStepFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_step_three, container, false);
+    }
+
+    void send() {
+        ///
+
+
+
     }
 }

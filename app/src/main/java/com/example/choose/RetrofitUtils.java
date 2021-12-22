@@ -1,31 +1,22 @@
 package com.example.choose;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.choose.api.PostController;
-
-import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import okhttp3.CookieJar;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUtils {
-
+    private static final String TYPE_ACCOUNT = "com.example.choose";
     private static final RetrofitUtils INSTANCE = new RetrofitUtils();
     private Retrofit retrofit;
-    private String login;
-    private String password;
+    private AccountManager accountManager;
 
 
     private RetrofitUtils() {
@@ -37,17 +28,15 @@ public class RetrofitUtils {
 
     public Retrofit getRetrofit() {
         if (retrofit == null) {
-            createRetrofit(null);
+            updateRetrofit();
         }
         return retrofit;
     }
 
-    public void createRetrofit(String session) {
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-
+    public void updateRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://choose.teheidoma.com/")
+                .baseUrl("http://192.168.1.176:8080/")
+//                .baseUrl("https://choose.teheidoma.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()
                         .followRedirects(false)
@@ -55,7 +44,7 @@ public class RetrofitUtils {
                             Request.Builder builder = chain
                                     .request()
                                     .newBuilder();
-                            if (login != null && password != null) {
+                            if (hasLogin()) {
                                 builder.addHeader("Authorization", getAuthHeader());
                             }
                             return chain.proceed(builder.build());
@@ -65,23 +54,22 @@ public class RetrofitUtils {
 
     @SuppressLint("NewApi")
     private String getAuthHeader() {
-        String value = login + ":" + password;
-        return "Basic "+ Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.US_ASCII));
+        Account account = accountManager.getAccountsByType(TYPE_ACCOUNT)[0];
+        String value = account.name + ":" + accountManager.getPassword(account);
+        return "Basic " + Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.US_ASCII));
     }
 
-    public String getLogin() {
-        return login;
+    public boolean hasLogin() {
+        return accountManager.getAccountsByType(TYPE_ACCOUNT).length > 0;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAccountManager(AccountManager accountManager) {
+        this.accountManager = accountManager;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void login(String login, String password) {
+        Account account = new Account(login, TYPE_ACCOUNT);
+        accountManager.addAccountExplicitly(account, password, null);
+        accountManager.setAuthToken(account, TYPE_ACCOUNT, null);
     }
 }

@@ -1,7 +1,5 @@
 package com.example.choose;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,15 +7,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.choose.R;
-import com.example.choose.api.LoginController;
 import com.example.choose.api.RegistrationController;
 import com.example.choose.dto.RegistrationUsernameDTO;
 import com.google.android.material.textfield.TextInputEditText;
@@ -45,7 +40,6 @@ public class FirstStepFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registrationController = RetrofitUtils.getInstance().getRetrofit().create(RegistrationController.class);
     }
 
     @Override
@@ -64,6 +58,11 @@ public class FirstStepFragment extends Fragment {
 
         confirm = view.findViewById(R.id.outlinedTextField3);
         second = view.findViewById(R.id.second);
+
+        //TODO remove
+        hidden.setText("Test123$");
+        second.setText("Test123$");
+        field.setText("test");
 
         field.addTextChangedListener(new TextWatcher() {
             @Override
@@ -132,6 +131,10 @@ public class FirstStepFragment extends Fragment {
     }
 
     public void send(ViewPager viewPager){
+
+        RetrofitUtils utils = RetrofitUtils.getInstance();
+
+        registrationController = utils.getRetrofit().create(RegistrationController.class);
         registrationController.username(
                 new RegistrationUsernameDTO(field.getText().toString(), hidden.getText().toString()))
                 .enqueue(new Callback<Void>() {
@@ -143,6 +146,10 @@ public class FirstStepFragment extends Fragment {
                             field.setTextColor(Color.parseColor("#F75010"));
                             return;
                         }
+
+                        utils.login(field.getText().toString(), hidden.getText().toString());
+                        utils.updateRetrofit();
+
                         getActivity().runOnUiThread(() -> {
                             viewPager.setCurrentItem(1);
                         });
