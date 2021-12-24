@@ -34,29 +34,15 @@
             android:resource="@xml/actions" />
 
         <activity
-            android:name=".RegistrationPassword"
-            android:exported="false"
-            android:theme="@style/Theme.ThemeOne" />
-        <activity
-            android:name=".RegistrationData"
-            android:exported="false"
-            android:theme="@style/Theme.ThemeOne" />
-        <activity
-            android:name=".RegistrationVarification"
-            android:exported="false"
-            android:theme="@style/Theme.ThemeOne" />
-        <activity
             android:name=".StartingActivity"
             android:exported="false"
             android:theme="@style/Theme.ThemeOne" />
+
         <activity
-            android:name=".RegistrationEmail"
+            android:name=".PlayOffPost"
             android:exported="false"
             android:theme="@style/Theme.ThemeOne" />
-        <activity
-            android:name=".RegistrationUsername"
-            android:exported="false"
-            android:theme="@style/Theme.ThemeOne" />
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,9 +55,7 @@ public class Registration extends AppCompatActivity {
         Button btn = (Button)findViewById(R.id.next_one_btn);
         TextView txt = (TextView)findViewById(R.id.login_btn);
 
-        //TMP
         LoginController controller = RetrofitUtils.getInstance().getRetrofit().create(LoginController.class);
-
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,24 +68,15 @@ public class Registration extends AppCompatActivity {
                 if(!firstStepFragment.isComplete()) return;
                 firstStepFragment.send(viewPager);
             }else if(viewPager.getCurrentItem() == 1){
-                viewPager.setCurrentItem(2);
-                btn.setText("Finish");
+                if(!secondStepFragment.isComplete()) return;
+                secondStepFragment.send(viewPager, btn);
             }else if(viewPager.getCurrentItem() == 2){
-                controller.login("test", "test")
-                        .enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                Log.i("post", response.raw().request().headers().toString());
-                                if (response.code() == 200) {
-                                    startActivity(new Intent(Registration.this, CreatePost.class));
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                Log.e("Login Error", t.getMessage(), t);
-                            }
-                        });
+                if(!thirdStepFragment.isComplete()) return;
+                thirdStepFragment.send(viewPager,
+                        controller,
+                        firstStepFragment.getUsername(),
+                        firstStepFragment.getPassword(),
+                        Registration.this);
             }
         });
 

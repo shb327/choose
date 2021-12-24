@@ -37,6 +37,7 @@ public class ChooseType extends AppCompatActivity {
         MaterialCardView materialCardView1 = findViewById(R.id.card1);
         MaterialCardView materialCardView2 = findViewById(R.id.card2);
         MaterialCardView materialCardView3 = findViewById(R.id.card3);
+        MaterialCardView materialCardView4 = findViewById(R.id.card4);
         MaterialCardView materialCardView5 = findViewById(R.id.card5);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -60,6 +61,13 @@ public class ChooseType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseType.this, VotingPost.class));
+            }
+        });
+
+        materialCardView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChooseType.this, PlayOffPost.class));
             }
         });
 

@@ -5,20 +5,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="100dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -50,82 +36,71 @@
         app:tint="@null"/>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleLayout"
         android:layout_height="wrap_content"
-        app:layout_anchorGravity="top|center"
-        app:layout_anchor="@+id/nestedScrollView2"
-        android:layout_marginTop="120dp">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/titleLayout"
-            android:layout_height="wrap_content"
-            android:layout_width="348dp"
-            android:layout_gravity="center_horizontal"
-            app:counterMaxLength="20"
-            android:hint="Add a title"
-            app:boxStrokeColor="#68B2A0"
+        android:layout_width="348dp"
+        android:layout_marginTop="120dp"
+        android:layout_gravity="center_horizontal"
+        app:counterMaxLength="20"
+        android:hint="Add a title"
+        app:boxStrokeColor="#68B2A0"
+        android:textColor="#68B2A0"
+        android:textColorHint="#68B2A0"
+        app:errorTextColor="@color/error"
+        android:inputType="textAutoCorrect"
+        app:hintTextColor="#68B2A0"
+        app:boxStrokeErrorColor="#F75010"
+        app:errorIconTint="@color/error"
+        app:boxStrokeWidth="2dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleTxt"
+            android:ems="16"
             android:textColor="#68B2A0"
-            android:textColorHint="#68B2A0"
-            app:errorTextColor="@color/error"
-            android:inputType="textAutoCorrect"
-            app:hintTextColor="#68B2A0"
-            app:boxStrokeErrorColor="#F75010"
-            app:errorIconTint="@color/error"
-            app:boxStrokeWidth="2dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/titleTxt"
-                android:ems="16"
-                android:textColor="#68B2A0"
-                android:textSize="18sp"
-                android:fontFamily="@font/montserrat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLength="20" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLength="21" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="348dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="215dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="256"
+        android:hint="Add description"
+        android:inputType="textMultiLine|textAutoCorrect"
+        android:textColor="#68B2A0"
+        android:textColorHint="#68B2A0"
+        app:hintTextColor="#68B2A0"
+        app:layout_anchor="@id/titleLayout"
+        app:boxStrokeErrorColor="#F75010"
+        app:boxStrokeColor="#68B2A0"
+        app:boxStrokeWidth="2dp"
+        app:errorIconTint="@color/error"
+        app:errorTextColor="@color/error"
+        app:layout_anchorGravity="center|bottom"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:counterTextColor="@color/main_green"
+        app:counterOverflowTextColor="@color/error">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contentTxt"
+            android:ems="16"
+            android:minLines="3"
+            android:textSize="18sp"
+            android:gravity="top"
+            android:fontFamily="@font/montserrat"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="256"
-            android:hint="Add description"
-            android:inputType="textMultiLine|textAutoCorrect"
-            android:textColor="#68B2A0"
-            android:textColorHint="#68B2A0"
-            app:hintTextColor="#68B2A0"
-            app:layout_anchor="@id/titleLayout"
-            app:boxStrokeErrorColor="#F75010"
-            app:boxStrokeColor="#68B2A0"
-            app:boxStrokeWidth="2dp"
-            app:errorIconTint="@color/error"
-            app:errorTextColor="@color/error"
-            app:layout_anchorGravity="center|bottom"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:counterTextColor="@color/main_green"
-            app:layout_constraintTop_toBottomOf="@id/titleLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contentTxt"
-                android:ems="16"
-                android:minLines="3"
-                android:textSize="18sp"
-                android:gravity="top"
-                android:fontFamily="@font/montserrat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:maxLines="20"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
@@ -158,8 +133,6 @@
             android:textColor="#68B2A0"
             android:textSize="24sp" />
 
-        <!--        @drawable/ic_round_arrow_circle_right_24-->
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sendBtn"
             android:layout_marginLeft="152dp"
@@ -174,10 +147,5 @@
             app:strokeWidth="2dp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
             app:strokeColor="#68B2A0" />
-
-
-
     </com.google.android.material.appbar.MaterialToolbar>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

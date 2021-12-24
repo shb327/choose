@@ -1,5 +1,6 @@
 package com.example.choose;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -59,11 +60,6 @@ public class FirstStepFragment extends Fragment {
         confirm = view.findViewById(R.id.outlinedTextField3);
         second = view.findViewById(R.id.second);
 
-        //TODO remove
-        hidden.setText("Test123$");
-        second.setText("Test123$");
-        field.setText("test");
-
         field.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -84,6 +80,7 @@ public class FirstStepFragment extends Fragment {
                 }else {
                     username.setErrorEnabled(false);
                     username.setError(null);
+                    username.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                     field.setTextColor(Color.parseColor("#56C596"));
                 }
             }
@@ -104,6 +101,7 @@ public class FirstStepFragment extends Fragment {
                 }else {
                     password.setErrorEnabled(false);
                     password.setError(null);
+                    password.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                     hidden.setTextColor(Color.parseColor("#56C596"));
                 }
             }
@@ -121,9 +119,14 @@ public class FirstStepFragment extends Fragment {
                     confirm.setErrorEnabled(true);
                     confirm.setError("Passwords Don't Match");
                     second.setTextColor(Color.parseColor("#F75010"));
+                }else if(!second.getText().toString().matches("^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*[\\d])+)(?=(.*[\\W])+)(?!.*\\s).{8,}$")){
+                    confirm.setErrorEnabled(true);
+                    confirm.setError("Invalid Password");
+                    second.setTextColor(Color.parseColor("#F75010"));
                 }else {
                     confirm.setErrorEnabled(false);
                     confirm.setError(null);
+                    confirm.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                     second.setTextColor(Color.parseColor("#56C596"));
                 }
             }
@@ -131,25 +134,39 @@ public class FirstStepFragment extends Fragment {
     }
 
     public void send(ViewPager viewPager){
-
         RetrofitUtils utils = RetrofitUtils.getInstance();
-
         registrationController = utils.getRetrofit().create(RegistrationController.class);
         registrationController.username(
                 new RegistrationUsernameDTO(field.getText().toString(), hidden.getText().toString()))
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.code() == 400) {
+                        if (field.getText().length() == 0) {
+                            username.setErrorEnabled(true);
+                            username.setError("Username Can't be Empty");
+                            username.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                            field.setTextColor(Color.parseColor("#F75010"));
+                            return;
+                        } else if (hidden.getText().length() == 0) {
+                            password.setErrorEnabled(true);
+                            password.setError("Please Input Password");
+                            password.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                            hidden.setTextColor(Color.parseColor("#F75010"));
+                            return;
+                        } else if (second.getText().length() == 0) {
+                            confirm.setErrorEnabled(true);
+                            confirm.setError("Please Repeat Your Password");
+                            confirm.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                            second.setTextColor(Color.parseColor("#F75010"));
+                            return;
+                        }else if (response.code() == 400) {
                             username.setErrorEnabled(true);
                             username.setError("Username Exists");
                             field.setTextColor(Color.parseColor("#F75010"));
                             return;
                         }
-
                         utils.login(field.getText().toString(), hidden.getText().toString());
                         utils.updateRetrofit();
-
                         getActivity().runOnUiThread(() -> {
                             viewPager.setCurrentItem(1);
                         });
@@ -157,11 +174,28 @@ public class FirstStepFragment extends Fragment {
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
                         t.printStackTrace();
+                        username.setErrorEnabled(true);
+                        username.setError("");
+                        field.setTextColor(Color.parseColor("#F75010"));
+                        password.setErrorEnabled(true);
+                        password.setError("");
+                        hidden.setTextColor(Color.parseColor("#F75010"));
+                        confirm.setErrorEnabled(true);
+                        confirm.setError("Something Went Wrong");
+                        second.setTextColor(Color.parseColor("#F75010"));
                     }
                 });
     }
 
     public boolean isComplete() {
-        return !username.isErrorEnabled() && !password.isErrorEnabled();
+        return !username.isErrorEnabled() && !password.isErrorEnabled() && !confirm.isErrorEnabled();
+    }
+
+    public String getUsername(){
+        return field.getText().toString();
+    }
+
+    public String getPassword(){
+        return hidden.getText().toString();
     }
 }

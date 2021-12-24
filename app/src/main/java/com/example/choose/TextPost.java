@@ -2,21 +2,15 @@ package com.example.choose;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -35,35 +29,46 @@ import retrofit2.Response;
 
 public class TextPost extends AppCompatActivity {
 
+    TextInputEditText editText1;
+    TextInputEditText editText2;
+    TextInputLayout titleLayout;
+    TextInputLayout contentLayout;
+    Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_post);
 
-        Button button = findViewById(R.id.sendBtn);
-        TextInputEditText editText1 = findViewById(R.id.titleTxt);
-        TextInputEditText editText2 = findViewById(R.id.contentTxt);
-        TextInputLayout titleLayout = findViewById(R.id.titleLayout);
-        TextInputLayout contentLayout = findViewById(R.id.contentLayout);
+        button = findViewById(R.id.sendBtn);
+        editText1 = findViewById(R.id.titleTxt);
+        editText2 = findViewById(R.id.contentTxt);
+        titleLayout = findViewById(R.id.titleLayout);
+        contentLayout = findViewById(R.id.contentLayout);
+        titleLayout.setErrorEnabled(true);
+        contentLayout.setErrorEnabled(true);
+        titleLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
 
         editText1.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editText1.getText().length()==20){
+                if (editText1.getText().length() == 21) {
                     titleLayout.setErrorEnabled(true);
                     titleLayout.setError("Character limit exceeded");
                     editText1.setTextColor(Color.parseColor("#F75010"));
-                }
-                else {
+
+                } else {
                     titleLayout.setErrorEnabled(false);
                     titleLayout.setError(null);
                     editText1.setTextColor(Color.parseColor("#68B2A0"));
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    titleLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
             }
         });
@@ -71,29 +76,27 @@ public class TextPost extends AppCompatActivity {
 
         editText2.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editText2.getText().length()>256){
+                if (editText2.getText().length() > 256) {
                     contentLayout.setErrorEnabled(true);
                     contentLayout.setError("Character limit exceeded");
                     editText2.setTextColor(Color.parseColor("#F75010"));
-                }
-                else {
+                } else {
                     contentLayout.setErrorEnabled(false);
                     contentLayout.setError(null);
                     editText2.setTextColor(Color.parseColor("#68B2A0"));
+                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    contentLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
             }
         });
-
-
 
         FloatingActionButton btn2 = findViewById(R.id.fab_start);
         btn2.setOnClickListener(v -> startActivity(new Intent(TextPost.this, ChooseType.class)));
@@ -106,12 +109,37 @@ public class TextPost extends AppCompatActivity {
             return false;
         });
 
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(titleLayout.isErrorEnabled() || editText1.getText().length()==0){
+                if ((editText1.getText().length() == 0) && (editText2.getText().length() == 0)) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    editText1.setTextColor(Color.parseColor("#F75010"));
+                    contentLayout.setErrorEnabled(true);
+                    contentLayout.setError("The description cannot be empty");
+                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    editText2.setTextColor(Color.parseColor("#F75010"));
+                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    return;
+                } else if (contentLayout.isErrorEnabled()) { return;
+                } else if (titleLayout.isErrorEnabled()) { return;
+                } else if (editText1.getText().length() == 0) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    editText1.setTextColor(Color.parseColor("#F75010"));
+                    return;
+                } else if (editText2.getText().length() == 0) {
+                    contentLayout.setErrorEnabled(true);
+                    contentLayout.setError("The description cannot be empty");
+                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    editText2.setTextColor(Color.parseColor("#F75010"));
+                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
                     return;
                 }
+
                 postController.createPost(new CreatePostRequestDTO(
                         editText2.getText().toString(),
                         editText1.getText().toString()))
@@ -128,20 +156,5 @@ public class TextPost extends AppCompatActivity {
                         });
             }
         });
-
-//        button.setOnClickListener(v -> postController.createPost(new CreatePostRequestDTO(
-//                        editText2.getText().toString(),
-//                        editText1.getText().toString()))
-//                        .enqueue(new Callback<PostDTO>() {
-//                            @Override
-//                            public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
-//                                startActivity(new Intent(TextPost.this, CreatePost.class));
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<PostDTO> call, Throwable t) {
-//                                Toast.makeText(TextPost.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }));
     }
 }
