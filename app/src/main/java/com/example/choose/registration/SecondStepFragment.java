@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.registration;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.choose.R;
+import com.example.choose.RetrofitUtils;
 import com.example.choose.api.RegistrationController;
 import com.example.choose.dto.RegistrationEmailDTO;
 import com.example.choose.dto.RegistrationUsernameDTO;

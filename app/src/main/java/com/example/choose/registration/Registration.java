@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,30 +6,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.choose.R;
+import com.example.choose.RetrofitUtils;
 import com.example.choose.api.LoginController;
-import com.example.choose.ui.PostFragment;
-import com.example.choose.ui.login.LoginActivity;
+import com.example.choose.login.LoginActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.rd.PageIndicatorView;
-import com.rd.animation.type.AnimationType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Registration extends AppCompatActivity {
     private TabLayout tabLayout;

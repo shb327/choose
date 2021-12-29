@@ -1,21 +1,24 @@
 package com.example.choose.recycler.post;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.choose.R;
+import com.example.choose.create.ChooseType;
 import com.example.choose.dto.PostDTO;
+import com.example.choose.home.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public List<PostDTO> localDataSet = new ArrayList<>();
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
@@ -24,16 +27,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-
             textView = view.findViewById(R.id.textView5);
             textType = view.findViewById(R.id.textViewTitle);
         }
-
         public TextView getTextType() { return textType; }
-
         public TextView getTextView() {
             return textView;
         }
+
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -41,7 +43,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.text_row_item, viewGroup, false);
-
         return new ViewHolder(view);
     }
 
@@ -76,5 +77,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return localDataSet.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
     }
 }

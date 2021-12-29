@@ -6,14 +6,24 @@ public class PostDTO {
     private Long id;
     private String title;
     private String type;
+    private String content;
 
-    public PostDTO(Long id, String title, String type) {
+    public PostDTO(Long id, String title, String type, String content) {
         this.id = id;
         this.title = title;
         this.type = type;
+        this.content = content;
     }
 
     public PostDTO() {
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getId() {

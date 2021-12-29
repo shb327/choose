@@ -1,10 +1,7 @@
-package com.example.choose;
+package com.example.choose.registration;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,17 +18,17 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.choose.R;
+import com.example.choose.RetrofitUtils;
 import com.example.choose.api.LoginController;
 import com.example.choose.api.RegistrationController;
 import com.example.choose.dto.RegistrationConfirmationDTO;
-import com.example.choose.dto.RegistrationEmailDTO;
+import com.example.choose.home.HomeActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 public class ThirdStepFragment extends Fragment {
 
@@ -219,7 +216,7 @@ public class ThirdStepFragment extends Fragment {
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 Log.i("post", response.raw().request().headers().toString());
                                 if (response.code() == 200) {
-                                    startActivity(new Intent(context, CreatePost.class));
+                                    startActivity(new Intent(context, HomeActivity.class));
                                 }
                             }
 

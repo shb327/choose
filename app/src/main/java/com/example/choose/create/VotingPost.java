@@ -1,12 +1,10 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -14,19 +12,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.choose.dto.CreatePostRequestDTO;
-import com.example.choose.dto.PostDTO;
+import com.example.choose.R;
+import com.example.choose.home.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class VotingPost extends AppCompatActivity {
     AutoCompleteTextView textIn;
@@ -53,7 +44,7 @@ public class VotingPost extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
         item.setOnMenuItemClickListener(item1 -> {
-            startActivity(new Intent(VotingPost.this, CreatePost.class));
+            startActivity(new Intent(VotingPost.this, HomeActivity.class));
             return false;
         });
 

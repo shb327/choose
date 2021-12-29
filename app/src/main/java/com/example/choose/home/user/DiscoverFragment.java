@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.home.user;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

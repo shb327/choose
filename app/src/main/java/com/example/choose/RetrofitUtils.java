@@ -18,7 +18,6 @@ public class RetrofitUtils {
     private Retrofit retrofit;
     private AccountManager accountManager;
 
-
     private RetrofitUtils() {
     }
 

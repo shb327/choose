@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 
-import com.example.choose.api.PostController;
+import com.example.choose.R;
+import com.example.choose.home.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -76,7 +77,7 @@ public class ImagePost extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
         item.setOnMenuItemClickListener(item1 -> {
-            startActivity(new Intent(ImagePost.this, CreatePost.class));
+            startActivity(new Intent(ImagePost.this, HomeActivity.class));
             return false;
         });
     }

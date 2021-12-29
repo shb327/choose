@@ -1,8 +1,10 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.choose.R;
 
 public class Petition extends AppCompatActivity {
 

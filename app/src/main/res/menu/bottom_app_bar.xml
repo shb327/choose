@@ -17,7 +17,7 @@
 
     <item
         android:id="@+id/itemEmpty"
-        android:title=""/>
+        android:title="" />
 
     <item
         android:id="@+id/notifications"

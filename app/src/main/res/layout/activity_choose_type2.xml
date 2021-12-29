@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        app:front_header_radius="2dp"
+        app:disable_when_open="true"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="34dp">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="140dp"
+            android:layout_marginBottom="50dp"
+            android:layout_height="21dp"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/name101"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.roacult.backdrop.BackdropLayout
+        android:id="@+id/container"
+        app:front_layout="@id/includeFront"
+        app:back_layout="@id/includeBack"
+
+        app:toolbarId="@id/toolbar"
+        app:peekHeight="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/includeBack"
+            layout="@layout/choose_type_back"/>
+
+        <include
+            android:id="@+id/includeFront"
+            layout="@layout/choose_type_front"/>
+
+
+    </com.roacult.backdrop.BackdropLayout>
+</LinearLayout>

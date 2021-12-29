@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.AccountManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.choose.ui.login.LoginActivity;
+import com.example.choose.login.LoginActivity;
+import com.example.choose.registration.Registration;
 
 public class StartingActivity extends AppCompatActivity {
 
@@ -37,6 +34,5 @@ public class StartingActivity extends AppCompatActivity {
                 startActivity(new Intent(StartingActivity.this, Registration.class));
             }
         });
-        RetrofitUtils.getInstance().setAccountManager(AccountManager.get(this));
     }
 }

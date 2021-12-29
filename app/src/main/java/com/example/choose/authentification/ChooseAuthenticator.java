@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.authentification;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -7,8 +7,8 @@ import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.os.Bundle;
 
-public class GovnoAuthentificator extends AbstractAccountAuthenticator {
-    public GovnoAuthentificator(Context context) {
+public class ChooseAuthenticator extends AbstractAccountAuthenticator {
+    public ChooseAuthenticator(Context context) {
         super(context);
     }
 

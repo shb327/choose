@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -18,6 +18,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.choose.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

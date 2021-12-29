@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,9 +14,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.example.choose.R;
+import com.example.choose.RetrofitUtils;
 import com.example.choose.api.PostController;
 import com.example.choose.dto.CreatePostRequestDTO;
 import com.example.choose.dto.PostDTO;
+import com.example.choose.home.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -105,7 +108,7 @@ public class TextPost extends AppCompatActivity {
         MenuItem item = bottomNavigationView.getMenu().findItem(R.id.profile);
         PostController postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
         item.setOnMenuItemClickListener(item1 -> {
-            startActivity(new Intent(TextPost.this, CreatePost.class));
+            startActivity(new Intent(TextPost.this, HomeActivity.class));
             return false;
         });
 
@@ -146,7 +149,7 @@ public class TextPost extends AppCompatActivity {
                         .enqueue(new Callback<PostDTO>() {
                             @Override
                             public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
-                                startActivity(new Intent(TextPost.this, CreatePost.class));
+                                startActivity(new Intent(TextPost.this, HomeActivity.class));
                             }
 
                             @Override

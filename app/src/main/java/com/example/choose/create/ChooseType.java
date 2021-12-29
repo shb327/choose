@@ -1,27 +1,17 @@
-package com.example.choose;
+package com.example.choose.create;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.BoringLayout;
-import android.text.Layout;
-import android.text.TextPaint;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.choose.R;
+import com.example.choose.home.HomeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 
@@ -81,7 +71,7 @@ public class ChooseType extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(ChooseType.this, CreatePost.class));
+                startActivity(new Intent(ChooseType.this, HomeActivity.class));
                 return false;
             }
         });
