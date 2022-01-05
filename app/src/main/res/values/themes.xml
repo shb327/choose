@@ -1,17 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.Choose" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">#205072</item>
         <item name="colorPrimaryVariant">#CDE0C9</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">#329D9C</item>
         <item name="colorSecondaryVariant">#329D9C</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Myslider" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/My_Tooltip</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
+    </style>
+
+    <style name="My_Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">#E0ECDE</item>
+    </style>
+
+    <style name="ThemeOverlay.Slider" parent="">
+        <item name="colorOnPrimary">#68B2A0</item>
     </style>
 
     <style name="error_appearance_one" parent="@android:style/TextAppearance">
@@ -37,31 +45,23 @@
     <style name="Theme.Choose.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.ThemeOne" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">#205072</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">#329D9C</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">#329D9C</item>
         <item name="colorSecondaryVariant">#329D9C</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.ThemeTwo" parent="Theme.MaterialComponents.Light">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">#CDE0C9</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">#329D9C</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">#329D9C</item>
         <item name="colorSecondaryVariant">#329D9C</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="Widget.App.Button.OutlinedButton.Icon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
@@ -77,5 +77,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-
 </resources>

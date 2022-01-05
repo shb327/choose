@@ -1,22 +1,12 @@
 package com.example.choose.dto;
 
 public class GetFeedRequestDTO {
-    private Integer offset;
     private Integer page;
     private Integer size;
 
-    public GetFeedRequestDTO(Integer offset, Integer page, Integer size) {
-        this.offset = offset;
+    public GetFeedRequestDTO( Integer page, Integer size) {
         this.page = page;
         this.size = size;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
     }
 
     public Integer getPage() {

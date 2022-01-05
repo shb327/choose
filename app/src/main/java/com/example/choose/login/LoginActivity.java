@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choose.R;
-import com.example.choose.RetrofitUtils;
+import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.api.LoginController;
 import com.example.choose.home.HomeActivity;
 

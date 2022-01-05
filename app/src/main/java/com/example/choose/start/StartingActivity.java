@@ -1,14 +1,14 @@
-package com.example.choose;
+package com.example.choose.start;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.choose.R;
 import com.example.choose.login.LoginActivity;
 import com.example.choose.registration.Registration;
 

@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="190dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         app:layout_anchor="@+id/nestedScrollView"
         app:layout_anchorGravity="top|center"
         android:paddingTop="20dp">
@@ -57,14 +57,14 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="194dp"
+        android:id="@+id/welcome"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Good Evening Vladick!"
+        android:text="Welcome on Board Vladick!"
         android:textColor="#205072"
         android:textSize="22sp"
         app:layout_anchor="@+id/nestedScrollView"
@@ -92,15 +92,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="14dp"
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="18dp"
         app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="end|top"
-        app:srcCompat="@drawable/vlad" />
+        app:layout_anchorGravity="end|top">
+        <ImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:srcCompat="@drawable/ic_round_person"
+            android:layout_gravity="center|center"/>
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:srcCompat="@drawable/empty_circle_white"/>
+    </FrameLayout>
 
     <Button
         android:id="@+id/textButton1"

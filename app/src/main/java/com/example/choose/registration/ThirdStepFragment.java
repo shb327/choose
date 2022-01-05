@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.choose.R;
-import com.example.choose.RetrofitUtils;
+import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.api.LoginController;
 import com.example.choose.api.RegistrationController;
 import com.example.choose.dto.RegistrationConfirmationDTO;

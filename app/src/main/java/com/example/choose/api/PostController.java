@@ -14,8 +14,8 @@ import retrofit2.http.POST;
 
 public interface PostController {
     @POST("/api/posts/create/text")
-    Call<PostDTO> createPost(@Body CreatePostRequestDTO createPostRequestDTO);
+    Call<PostDTO> createPost (@Body CreatePostRequestDTO createPostRequestDTO);
 
     @POST("/api/posts/feed")
-    Call<GetFeedResponseDTO> getFeed(@Body GetFeedRequestDTO getFeedRequestDTO);
+    Call<GetFeedResponseDTO> getFeed (@Body GetFeedRequestDTO getFeedRequestDTO);
 }

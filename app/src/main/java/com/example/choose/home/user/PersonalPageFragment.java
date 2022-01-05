@@ -1,11 +1,9 @@
 package com.example.choose.home.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.choose.ChooseType2;
 import com.example.choose.R;
-import com.example.choose.create.ChooseType;
-import com.example.choose.home.HomeActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.choose.ChooseType2;
 import com.example.choose.create.ChooseType;
 import com.example.choose.R;
 import com.example.choose.home.user.PersonalPageFragment;
@@ -18,6 +17,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class HomeActivity extends AppCompatActivity {
 
+    MenuItem item1;
+    MenuItem item2;
+    MenuItem item3;
+    MenuItem item4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,52 +32,42 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
-        MenuItem item1 = bottomNavigationView.getMenu().findItem(R.id.home);
-        MenuItem item2 = bottomNavigationView.getMenu().findItem(R.id.communities);
-        MenuItem item3 = bottomNavigationView.getMenu().findItem(R.id.notifications);
-        MenuItem item4 = bottomNavigationView.getMenu().findItem(R.id.profile);
+        item1 = bottomNavigationView.getMenu().findItem(R.id.home);
+        item2 = bottomNavigationView.getMenu().findItem(R.id.communities);
+        item3 = bottomNavigationView.getMenu().findItem(R.id.notifications);
+        item4 = bottomNavigationView.getMenu().findItem(R.id.profile);
 
         MenuItem empty = bottomNavigationView.getMenu().findItem(R.id.itemEmpty);
         empty.setEnabled(false);
 
         FloatingActionButton btn2 = findViewById(R.id.fab_start);
-        btn2.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ChooseType2.class)));
+        btn2.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ChooseType.class)));
 
-        item4.setEnabled(true);
+        Bundle extras = getIntent().getExtras();
 
-        item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                displayView(0);
-                return false;
+        switchFragment(item4,0);
+        switchFragment(item3,1);
+        switchFragment(item2,2);
+        switchFragment(item1,3);
+
+        if(extras != null) {
+            switch (extras.getInt("fragment")) {
+                case 0:
+                    displayView(0);
+                    break;
+                case 1:
+                    displayView(1);
+                    break;
+                case 2:
+                    displayView(2);
+                    break;
+                case 3:
+                    displayView(3);
+                    break;
             }
-        });
-
-        item3.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                displayView(1);
-                return false;
-            }
-        });
-
-        item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                displayView(2);
-                return false;
-            }
-        });
-
-        item1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                displayView(3);
-                return false;
-            }
-        });
-
-        displayView(0);
+        }else{
+            displayView(0);
+        }
     }
 
     public void showFragment(Fragment fragment, int position) {
@@ -87,16 +80,30 @@ public class HomeActivity extends AppCompatActivity {
         switch (position) {
             case 0:
                 showFragment(new PersonalPageFragment(), position);
+                item4.setChecked(true);
                 break;
             case 1:
                 showFragment(new NotificationsFragment(), position);
+                item3.setChecked(true);
                 break;
             case 2:
                 showFragment(new CommunitiesFragment(), position);
+                item2.setChecked(true);
                 break;
             case 3:
                 showFragment(new FeedFragment(), position);
+                item1.setChecked(true);
                 break;
         }
+    }
+
+    public void switchFragment(MenuItem item ,int position) {
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                displayView(position);
+                return false;
+            }
+        });
     }
 }

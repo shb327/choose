@@ -1,14 +1,14 @@
-package com.example.choose;
+package com.example.choose.start;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.accounts.AccountManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 
+import com.example.choose.R;
+import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.home.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {

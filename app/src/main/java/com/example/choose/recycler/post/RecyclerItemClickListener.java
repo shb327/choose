@@ -1,4 +1,4 @@
-package com.example.choose;
+package com.example.choose.recycler.post;
 
 import android.content.Context;
 import android.view.GestureDetector;

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.choose.R;
-import com.example.choose.RetrofitUtils;
+import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.api.LoginController;
 import com.example.choose.login.LoginActivity;
 import com.google.android.material.tabs.TabLayout;

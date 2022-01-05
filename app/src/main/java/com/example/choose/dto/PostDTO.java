@@ -7,23 +7,19 @@ public class PostDTO {
     private String title;
     private String type;
     private String content;
-
-    public PostDTO(Long id, String title, String type, String content) {
-        this.id = id;
-        this.title = title;
-        this.type = type;
-        this.content = content;
-    }
+    private String description;
+    private String url;
 
     public PostDTO() {
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+    public PostDTO(Long id, String title, String type, String content, String description, String url) {
+        this.id = id;
+        this.title = title;
+        this.type = type;
         this.content = content;
+        this.description = description;
+        this.url = url;
     }
 
     public Long getId() {
@@ -38,6 +34,10 @@ public class PostDTO {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getType() {
         return type;
     }
@@ -46,8 +46,28 @@ public class PostDTO {
         this.type = type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -55,6 +75,10 @@ public class PostDTO {
         return "PostDTO{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }
