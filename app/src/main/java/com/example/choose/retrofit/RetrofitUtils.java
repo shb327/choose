@@ -4,6 +4,11 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 
+import com.example.choose.dto.PostDTO;
+import com.example.choose.dto.PostDTODeserializer;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -26,16 +31,16 @@ public class RetrofitUtils {
     }
 
     public Retrofit getRetrofit() {
-        if (retrofit == null) {
-            updateRetrofit();
-        }
+        if (retrofit == null) { updateRetrofit(); }
         return retrofit;
     }
 
     public void updateRetrofit() {
+        Gson gson = new GsonBuilder().registerTypeAdapter(PostDTO.class, new PostDTODeserializer()).create();
+        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://choose.teheidoma.com/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
                 .client(new OkHttpClient.Builder()
                         .followRedirects(false)
                         .addInterceptor(chain -> {

@@ -56,7 +56,6 @@ public class TextPostFragment extends Fragment {
        contentLayout.setErrorEnabled(true);
        titleLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
 
-
        editText1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -137,7 +136,7 @@ public class TextPostFragment extends Fragment {
                     return;
                 }
 
-                postController.createPost(new CreatePostRequestDTO(
+                postController.createTextPost(new CreatePostRequestDTO(
                         editText2.getText().toString(),
                         editText1.getText().toString()))
                         .enqueue(new Callback<PostDTO>() {

@@ -10,7 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.choose.R;
+import com.example.choose.community.CommunityDisplay;
 import com.example.choose.create.PlayOffChooseFragment;
+import com.example.choose.dto.ImagePostDTO;
+import com.example.choose.dto.PostDTO;
+import com.example.choose.dto.PostDTODeserializer;
+import com.example.choose.dto.TextPostDTO;
 import com.example.choose.home.CommunitiesFragment;
 import com.example.choose.home.FeedFragment;
 import com.example.choose.home.HomeActivity;
@@ -27,37 +32,35 @@ public class PostDisplay extends AppCompatActivity {
         TextView title = findViewById(R.id.textView10);
         TextView name = findViewById(R.id.name);
         Button button = findViewById(R.id.sendBtn);
-        int id;
-        String type;
 
         Bundle extras = getIntent().getExtras();
-
-        title.setText(extras.getString("title"));
-        type = extras.getString("type");
-        id = extras.getInt("id");
+        String from = extras.getString("from");
 
 
-        switch (type){
-            case "IMAGE":
-                displaySecondView(extras.getString("desc"), extras.getString("url"));
+        PostDTO post = (PostDTO) extras.getSerializable("post");
+        title.setText(post.getTitle());
+
+        switch (post.getType()){
+            case TEXT:
+                TextPostDTO textPostDTO = ((TextPostDTO) post);
+                displayFirstView(textPostDTO.getContent());
+                break;
+            case IMAGE:
+                ImagePostDTO imagePostDTO = ((ImagePostDTO) post);
                 name.setText("Image Post");
-                break;
-            case "PETITION":
-                //TODO
-                break;
-            case "VOTE":
-                //TODO
-                break;
-            case "PLAYOFF":
-                //TODO
-                break;
-            default:
-                displayFirstView(extras.getString("cont"));
+                displaySecondView(imagePostDTO.getDescription(), imagePostDTO.getUrl());
                 break;
         }
 
-
-        button.setOnClickListener(v -> startActivity(new Intent(PostDisplay.this, HomeActivity.class)));
+        button.setOnClickListener(v -> {
+            if(from.equals("CommunityDisplay")) {
+                Intent i = new Intent(PostDisplay.this, CommunityDisplay.class);
+                i.putExtra("community", extras.getSerializable("community"));
+                startActivity(i);
+            } else {
+                startActivity(new Intent(PostDisplay.this, HomeActivity.class));
+            }
+        });
     }
 
     public void showFragment(Fragment fragment, int position) {

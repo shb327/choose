@@ -1,25 +1,18 @@
 package com.example.choose.dto;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class PostDTO {
+public class PostDTO implements Serializable {
     private Long id;
     private String title;
-    private String type;
-    private String content;
-    private String description;
-    private String url;
+    private PostType type;
 
-    public PostDTO() {
-    }
+    public PostDTO() { }
 
-    public PostDTO(Long id, String title, String type, String content, String description, String url) {
+    public PostDTO(Long id, String title, PostType type) {
         this.id = id;
         this.title = title;
         this.type = type;
-        this.content = content;
-        this.description = description;
-        this.url = url;
     }
 
     public Long getId() {
@@ -38,36 +31,12 @@ public class PostDTO {
         this.title = title;
     }
 
-    public String getType() {
+    public PostType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(PostType type) {
         this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     @Override
@@ -76,9 +45,6 @@ public class PostDTO {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
-                ", content='" + content + '\'' +
-                ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
                 '}';
     }
 }

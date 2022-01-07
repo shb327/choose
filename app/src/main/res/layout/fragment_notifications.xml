@@ -40,14 +40,5 @@
             android:text="Choose"
             android:textColor="#68B2A0"
             android:textSize="22sp" />
-
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
-            android:layoutDirection="rtl"
-            android:searchIcon="@drawable/ic_round_search_24"
-            />
     </com.google.android.material.appbar.MaterialToolbar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

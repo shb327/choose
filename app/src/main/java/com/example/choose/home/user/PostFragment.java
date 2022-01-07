@@ -82,10 +82,8 @@ public class PostFragment extends Fragment{
                 new RecyclerItemClickListener(inflate.getContext(), recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         Intent i = new Intent(inflate.getContext(), PostDisplay.class);
-                        i.putExtra("title", adapter.localDataSet.get(position).getTitle());
-                        i.putExtra("cont", adapter.localDataSet.get(position).getContent());
-                        i.putExtra("type", adapter.localDataSet.get(position).getType());
-                        i.putExtra("id", adapter.localDataSet.get(position).getId());
+                        i.putExtra("post", adapter.localDataSet.get(position));
+                        i.putExtra("from", "PostFragment");
                         startActivity(i);
                     }
 

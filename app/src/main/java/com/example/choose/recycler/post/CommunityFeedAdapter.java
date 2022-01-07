@@ -8,33 +8,35 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.choose.R;
+import com.example.choose.dto.ImagePostDTO;
 import com.example.choose.dto.PostDTO;
 import com.example.choose.dto.PostType;
+import com.example.choose.dto.TextPostDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
+public class CommunityFeedAdapter extends RecyclerView.Adapter<CommunityFeedAdapter.ViewHolder>{
     public List<PostDTO> localDataSet = new ArrayList<>();
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
-        private final TextView textType;
+        private final TextView title;
+        private final TextView description;
 
         public ViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.textView5);
-            textType = view.findViewById(R.id.textViewTitle);
+            title = view.findViewById(R.id.title);
+            description = view.findViewById(R.id.description);
         }
-        public TextView getTextType() { return textType; }
-        public TextView getTextView() {
-            return textView;
+        public TextView getDescription() { return description; }
+        public TextView getTitle() {
+            return title;
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.text_row_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.feed_row_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -42,23 +44,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         PostDTO post = localDataSet.get(position);
         PostType type = post.getType();
-        viewHolder.getTextView().setText(post.getTitle());
+        viewHolder.getTitle().setText(post.getTitle());
         switch (type){
             case IMAGE:
-                viewHolder.getTextType().setText("Image Post");
-                break;
-            case PETITION:
-                viewHolder.getTextType().setText("Petition");
-                break;
-            case VOTE:
-                viewHolder.getTextType().setText("Voting Post");
-                break;
-            case PLAYOFF:
-                viewHolder.getTextType().setText("Play-Off Post");
+                ImagePostDTO imagePostDTO = ((ImagePostDTO) post);
+                viewHolder.getDescription().setText(imagePostDTO.getDescription());
                 break;
             default:
             case TEXT:
-                viewHolder.getTextType().setText("Text Post");
+                TextPostDTO textPostDTO = ((TextPostDTO) post);
+                viewHolder.getDescription().setText(textPostDTO.getContent());
                 break;
         }
     }

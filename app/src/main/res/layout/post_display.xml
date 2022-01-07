@@ -94,7 +94,7 @@
             android:layout_marginRight="10dp"
             android:fontFamily="@font/montserrat"
             android:text="0"
-            android:textColor="#68B2A0"
+            android:textColor="#329D9C"
             android:textSize="20sp" />
 
         <ImageView

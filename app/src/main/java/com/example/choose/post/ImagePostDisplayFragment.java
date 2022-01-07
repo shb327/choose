@@ -23,7 +23,10 @@ public class ImagePostDisplayFragment extends Fragment {
 
     public ImagePostDisplayFragment() { }
 
-    public ImagePostDisplayFragment(String desc, String url) { }
+    public ImagePostDisplayFragment(String description, String url) {
+        this.description = description;
+        this.url = url;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +37,8 @@ public class ImagePostDisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_image_post_display, container, false);
         TextView desc = inflate.findViewById(R.id.desc);
-        desc.setText("Good Image");
-        new DownloadImageTask((ImageView) inflate.findViewById(R.id.image)).execute("https://choose-image.s3.us-east-2.amazonaws.com/fd8002d5-9bdc-4436-ab51-3a8735756652.jpg");
+        desc.setText(description);
+        new DownloadImageTask((ImageView) inflate.findViewById(R.id.image)).execute(url);
         return inflate;
     }
 }

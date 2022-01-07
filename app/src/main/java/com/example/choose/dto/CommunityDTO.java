@@ -1,6 +1,8 @@
 package com.example.choose.dto;
 
-public class CommunityDTO {
+import java.io.Serializable;
+
+public class CommunityDTO implements Serializable {
     private Long id;
     private String name;
     private String username;

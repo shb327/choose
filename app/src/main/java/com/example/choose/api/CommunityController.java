@@ -1,17 +1,15 @@
 package com.example.choose.api;
 
-import com.example.choose.dto.GetAllCommunitiesRequestDTO;
-import com.example.choose.dto.GetAllCommunitiesResponseDTO;
-import com.example.choose.dto.GetFeedRequestDTO;
-import com.example.choose.dto.GetFeedResponseDTO;
+import com.example.choose.dto.CommunityDTO;
+
+import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface CommunityController {
-
-    @POST("/api/communities")
-    Call<GetAllCommunitiesResponseDTO> getAllCommunities(@Body GetAllCommunitiesRequestDTO getAllCommunitiesRequestDTO);
+    @GET("/api/communities")
+    Call<List<CommunityDTO>> getAllCommunities(@Query("page") int page, @Query("size") int size);
 
 }

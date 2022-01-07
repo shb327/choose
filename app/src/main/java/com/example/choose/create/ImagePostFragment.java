@@ -12,20 +12,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.choose.R;
+import com.example.choose.dto.CreatePostRequestDTO;
+import com.example.choose.dto.PostDTO;
+import com.example.choose.home.HomeActivity;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ImagePostFragment extends Fragment {
 
     public ImagePostFragment() { }
 
     ImageView tmp;
+    Button button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,7 @@ public class ImagePostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate =  inflater.inflate(R.layout.fragment_image_post, container, false);
+        button = inflate.findViewById(R.id.sendBtn);
 
         TextInputEditText descriptionTxt = inflate.findViewById(R.id.descriptionTxt);
         TextInputLayout descriptionLayout = inflate.findViewById(R.id.descriptionLayout);
@@ -74,6 +84,26 @@ public class ImagePostFragment extends Fragment {
             public void onClick(View view) {
                 ImagePicker.with(ImagePostFragment.this).cameraOnly().crop().compress(1024)
                         .maxResultSize(1080, 1080).start();
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                postController.createTextPost(new CreatePostRequestDTO(
+//                        editText2.getText().toString(),
+//                        editText1.getText().toString()))
+//                        .enqueue(new Callback<PostDTO>() {
+//                            @Override
+//                            public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
+//                                startActivity(new Intent(inflate.getContext(), HomeActivity.class));
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<PostDTO> call, Throwable t) {
+//                                Toast.makeText(inflate.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
             }
         });
 

@@ -30,19 +30,30 @@
             android:textColor="#68B2A0"
             android:textSize="22sp" />
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
+<!--        <SearchView-->
+<!--            android:id="@+id/searchView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="12dp"-->
+<!--            android:layoutDirection="rtl"-->
+<!--            android:searchIcon="@drawable/ic_round_search_24" />-->
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
-            android:layoutDirection="rtl"
-            android:searchIcon="@drawable/ic_round_search_24"
-            />
+            android:layout_gravity="end"
+            android:paddingRight="12dp"
+            android:layout_marginEnd="20dp"
+            app:srcCompat="@drawable/ic_round_search_24"/>
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/communities_recycle_view"
         android:layout_width="match_parent"
+        android:paddingBottom="38dp"
+        android:paddingTop="6dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="24dp"
         android:layout_marginTop="56dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true" />
