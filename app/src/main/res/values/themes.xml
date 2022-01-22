@@ -77,4 +77,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="MontserratBoldTextAppearance">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.choose.recycler.post;
+package com.example.choose.recyclers;
 
 import java.util.ArrayList;
 

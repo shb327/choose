@@ -4,13 +4,17 @@ import java.io.Serializable;
 
 public class PostDTO implements Serializable {
     private Long id;
+    private Long authorId;
+    private String authorUsername;
     private String title;
     private PostType type;
 
     public PostDTO() { }
 
-    public PostDTO(Long id, String title, PostType type) {
+    public PostDTO(Long id, Long authorId, String authorUsername, String title, PostType type) {
         this.id = id;
+        this.authorId = authorId;
+        this.authorUsername = authorUsername;
         this.title = title;
         this.type = type;
     }
@@ -21,6 +25,22 @@ public class PostDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
     }
 
     public String getTitle() {
@@ -43,8 +63,10 @@ public class PostDTO implements Serializable {
     public String toString() {
         return "PostDTO{" +
                 "id=" + id +
+                ", authorId=" + authorId +
+                ", authorUsername='" + authorUsername + '\'' +
                 ", title='" + title + '\'' +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

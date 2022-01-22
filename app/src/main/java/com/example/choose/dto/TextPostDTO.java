@@ -5,8 +5,8 @@ public class TextPostDTO extends PostDTO{
 
     public TextPostDTO() { }
 
-    public TextPostDTO(Long id, String title, PostType type, String content) {
-        super(id, title, type);
+    public TextPostDTO(Long id, Long authorId, String authorUsername, String title, PostType type, String content) {
+        super(id, authorId, authorUsername, title, type);
         this.content = content;
     }
 

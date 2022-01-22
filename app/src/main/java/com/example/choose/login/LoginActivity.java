@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Log.i("post", response.raw().request().headers().toString());
-                            if (response.code() == 200) {
+                            if (response.code() == 200  || response.code() == 302) {
                                 utils.login(email.getText().toString(), password.getText().toString());
                                 utils.updateRetrofit();
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));

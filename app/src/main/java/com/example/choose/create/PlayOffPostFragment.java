@@ -1,33 +1,15 @@
 package com.example.choose.create;
 
-import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Layout;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.choose.R;
-import com.example.choose.create.ChooseType;
-import com.example.choose.dto.CreatePostRequestDTO;
-import com.example.choose.dto.PostDTO;
-import com.example.choose.home.HomeActivity;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PlayOffPostFragment extends Fragment {
 

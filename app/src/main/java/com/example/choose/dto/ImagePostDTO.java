@@ -4,8 +4,8 @@ public class ImagePostDTO extends PostDTO {
     private String url;
     private String description;
 
-    public ImagePostDTO(Long id, String title, PostType type, String url, String description) {
-        super(id, title, type);
+    public ImagePostDTO(Long id, Long authorId, String authorUsername, String title, PostType type, String url, String description) {
+        super(id, authorId, authorUsername, title, type);
         this.url = url;
         this.description = description;
     }

@@ -11,11 +11,15 @@ import android.widget.TextView;
 
 import com.example.choose.R;
 import com.example.choose.community.CommunityDisplay;
+import com.example.choose.create.ChooseType;
 import com.example.choose.create.PlayOffChooseFragment;
 import com.example.choose.dto.ImagePostDTO;
+import com.example.choose.dto.PetitionPostDTO;
+import com.example.choose.dto.PlayOffPostDTO;
 import com.example.choose.dto.PostDTO;
 import com.example.choose.dto.PostDTODeserializer;
 import com.example.choose.dto.TextPostDTO;
+import com.example.choose.dto.VotingPostDTO;
 import com.example.choose.home.CommunitiesFragment;
 import com.example.choose.home.FeedFragment;
 import com.example.choose.home.HomeActivity;
@@ -36,7 +40,6 @@ public class PostDisplay extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String from = extras.getString("from");
 
-
         PostDTO post = (PostDTO) extras.getSerializable("post");
         title.setText(post.getTitle());
 
@@ -50,6 +53,23 @@ public class PostDisplay extends AppCompatActivity {
                 name.setText("Image Post");
                 displaySecondView(imagePostDTO.getDescription(), imagePostDTO.getUrl());
                 break;
+            case PETITION:
+                PetitionPostDTO petitionPostDTO = ((PetitionPostDTO) post);
+                name.setText("Petition Post");
+                displayThirdView(petitionPostDTO.getId().intValue(),
+                        petitionPostDTO.getDescription(),
+                        petitionPostDTO.getMediaUrl());
+                break;
+            case VOTE:
+                VotingPostDTO votingPostDTO = ((VotingPostDTO) post);
+                name.setText("Voting Post");
+                displayForthView(votingPostDTO.getId().intValue());
+                break;
+            case PLAYOFF:
+                PlayOffPostDTO playOffPostDTO = ((PlayOffPostDTO) post);
+                name.setText("Play-Off Post");
+                displayFifthView(playOffPostDTO.getId().intValue());
+                break;
         }
 
         button.setOnClickListener(v -> {
@@ -57,23 +77,44 @@ public class PostDisplay extends AppCompatActivity {
                 Intent i = new Intent(PostDisplay.this, CommunityDisplay.class);
                 i.putExtra("community", extras.getSerializable("community"));
                 startActivity(i);
-            } else {
+            } else if(from.equals("CommunityDisplayCF")) {
+                Intent i = new Intent(PostDisplay.this, CommunityDisplay.class);
+                i.putExtra("community", extras.getSerializable("community"));
+                i.putExtra("from", "CommunitiesFragment");
+                startActivity(i);
+            }else if(from.equals("Feed")) {
+                Intent i = new Intent(PostDisplay.this, HomeActivity.class);
+                i.putExtra("fragment", 3);
+                startActivity(i);
+            }else {
                 startActivity(new Intent(PostDisplay.this, HomeActivity.class));
             }
         });
     }
 
-    public void showFragment(Fragment fragment, int position) {
+    public void showFragment(Fragment fragment) {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
         mTransaction.replace(R.id.display_container, fragment, fragment.getClass().getName());
         mTransaction.commit();
     }
 
     public void displayFirstView(String desc) {
-        showFragment(new TextPostDisplayFragment(desc),0);
+        showFragment(new TextPostDisplayFragment(desc));
     }
 
     public void displaySecondView(String desc, String url) {
-        showFragment(new ImagePostDisplayFragment(desc, url),1);
+        showFragment(new ImagePostDisplayFragment(desc, url));
+    }
+
+    public void displayThirdView(Integer id, String desc, String url) {
+        showFragment(new PetitionPostDisplayFragment(id, desc, url));
+    }
+
+    public void displayForthView(Integer id) {
+        showFragment(new VotingPostDisplayFragment(id));
+    }
+
+    public void displayFifthView(Integer id) {
+        showFragment(new PlayOffPostDisplayFragment(id));
     }
 }

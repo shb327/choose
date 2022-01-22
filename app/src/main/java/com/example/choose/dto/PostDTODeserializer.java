@@ -12,7 +12,6 @@ import java.lang.reflect.Type;
 public class PostDTODeserializer implements JsonDeserializer<PostDTO> {
     private final Gson gson = new Gson();
 
-
     @Override
     public PostDTO deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject postDTO = jsonElement.getAsJsonObject();
@@ -22,6 +21,12 @@ public class PostDTODeserializer implements JsonDeserializer<PostDTO> {
                 return gson.fromJson(jsonElement, TextPostDTO.class);
             case IMAGE:
                 return gson.fromJson(jsonElement, ImagePostDTO.class);
+            case PETITION:
+                return gson.fromJson(jsonElement, PetitionPostDTO.class);
+            case VOTE:
+                return gson.fromJson(jsonElement, VotingPostDTO.class);
+            case PLAYOFF:
+                return gson.fromJson(jsonElement, PlayOffPostDTO.class);
             default:
                 throw new IllegalArgumentException("invalid post type");
         }

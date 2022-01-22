@@ -7,7 +7,6 @@ public class CommunityDTO implements Serializable {
     private String name;
     private String username;
     private String description;
-    private Long owner;
 
     public CommunityDTO() { }
 
@@ -16,7 +15,6 @@ public class CommunityDTO implements Serializable {
         this.name = name;
         this.username = username;
         this.description = description;
-        this.owner = owner;
     }
 
     public Long getId() {
@@ -51,13 +49,6 @@ public class CommunityDTO implements Serializable {
         this.description = description;
     }
 
-    public Long getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Long owner) {
-        this.owner = owner;
-    }
 
     @Override
     public String toString() {
@@ -66,7 +57,6 @@ public class CommunityDTO implements Serializable {
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", description='" + description + '\'' +
-                ", owner=" + owner +
                 '}';
     }
 }

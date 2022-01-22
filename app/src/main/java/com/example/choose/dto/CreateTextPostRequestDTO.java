@@ -1,11 +1,11 @@
 package com.example.choose.dto;
 
-public class CreatePostRequestDTO {
+public class CreateTextPostRequestDTO {
     private String content;
 
     private String title;
 
-    public CreatePostRequestDTO(String content, String title) {
+    public CreateTextPostRequestDTO(String content, String title) {
         this.content = content;
         this.title = title;
     }

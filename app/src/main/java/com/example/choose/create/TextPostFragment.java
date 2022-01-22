@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.example.choose.R;
 import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.api.PostController;
-import com.example.choose.dto.CreatePostRequestDTO;
+import com.example.choose.dto.CreateTextPostRequestDTO;
 import com.example.choose.dto.PostDTO;
 import com.example.choose.home.HomeActivity;
 import com.google.android.material.textfield.TextInputEditText;
@@ -36,10 +36,10 @@ public class TextPostFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    TextInputEditText editText1;
-    TextInputEditText editText2;
+    TextInputEditText titleText;
+    TextInputEditText descriptionText;
     TextInputLayout titleLayout;
-    TextInputLayout contentLayout;
+    TextInputLayout descriptionLayout;
     Button button;
 
     @Override
@@ -48,15 +48,15 @@ public class TextPostFragment extends Fragment {
        PostController postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
 
        button = inflate.findViewById(R.id.sendBtn);
-       editText1 = inflate.findViewById(R.id.titleTxt);
-       editText2 = inflate.findViewById(R.id.contentTxt);
+       titleText = inflate.findViewById(R.id.titleTxt);
+       descriptionText = inflate.findViewById(R.id.contentTxt);
        titleLayout = inflate.findViewById(R.id.titleLayout);
-       contentLayout = inflate.findViewById(R.id.contentLayout);
+       descriptionLayout = inflate.findViewById(R.id.contentLayout);
        titleLayout.setErrorEnabled(true);
-       contentLayout.setErrorEnabled(true);
+       descriptionLayout.setErrorEnabled(true);
        titleLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
 
-       editText1.addTextChangedListener(new TextWatcher() {
+       titleText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
@@ -65,15 +65,15 @@ public class TextPostFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editText1.getText().length() == 21) {
+                if (titleText.getText().length() == 21) {
                     titleLayout.setErrorEnabled(true);
                     titleLayout.setError("Character Limit Exceeded");
-                    editText1.setTextColor(Color.parseColor("#F75010"));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
 
                 } else {
                     titleLayout.setErrorEnabled(false);
                     titleLayout.setError(null);
-                    editText1.setTextColor(Color.parseColor("#68B2A0"));
+                    titleText.setTextColor(Color.parseColor("#68B2A0"));
                     titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                     titleLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
@@ -81,7 +81,7 @@ public class TextPostFragment extends Fragment {
        });
 
 
-       editText2.addTextChangedListener(new TextWatcher() {
+       descriptionText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
@@ -90,17 +90,17 @@ public class TextPostFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editText2.getText().length() > 256) {
-                    contentLayout.setErrorEnabled(true);
-                    contentLayout.setError("Character limit exceeded");
-                    editText2.setTextColor(Color.parseColor("#F75010"));
+                if (descriptionText.getText().length() > 256) {
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("Character limit exceeded");
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
                 } else {
-                    contentLayout.setErrorEnabled(false);
-                    contentLayout.setError(null);
-                    editText2.setTextColor(Color.parseColor("#68B2A0"));
-                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
-                    contentLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
-                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    descriptionLayout.setErrorEnabled(false);
+                    descriptionLayout.setError(null);
+                    descriptionText.setTextColor(Color.parseColor("#68B2A0"));
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    descriptionLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
             }
        });
@@ -108,37 +108,37 @@ public class TextPostFragment extends Fragment {
        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((editText1.getText().length() == 0) && (editText2.getText().length() == 0)) {
+                if ((titleText.getText().length() == 0) && (descriptionText.getText().length() == 0)) {
                     titleLayout.setErrorEnabled(true);
                     titleLayout.setError("The title cannot be empty");
                     titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                    editText1.setTextColor(Color.parseColor("#F75010"));
-                    contentLayout.setErrorEnabled(true);
-                    contentLayout.setError("The description cannot be empty");
-                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                    editText2.setTextColor(Color.parseColor("#F75010"));
-                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("The description cannot be empty");
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
                     return;
-                } else if (contentLayout.isErrorEnabled()) { return;
+                } else if (titleText.getText().length() == 0) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
+                    return;
+                } else if (descriptionText.getText().length() == 0) {
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("The description cannot be empty");
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    return;
+                } else if (descriptionLayout.isErrorEnabled()) { return;
                 } else if (titleLayout.isErrorEnabled()) { return;
-                } else if (editText1.getText().length() == 0) {
-                    titleLayout.setErrorEnabled(true);
-                    titleLayout.setError("The title cannot be empty");
-                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                    editText1.setTextColor(Color.parseColor("#F75010"));
-                    return;
-                } else if (editText2.getText().length() == 0) {
-                    contentLayout.setErrorEnabled(true);
-                    contentLayout.setError("The description cannot be empty");
-                    contentLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                    editText2.setTextColor(Color.parseColor("#F75010"));
-                    contentLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                    return;
                 }
 
-                postController.createTextPost(new CreatePostRequestDTO(
-                        editText2.getText().toString(),
-                        editText1.getText().toString()))
+                postController.createTextPost(new CreateTextPostRequestDTO(
+                        descriptionText.getText().toString(),
+                        titleText.getText().toString()))
                         .enqueue(new Callback<PostDTO>() {
                             @Override
                             public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {

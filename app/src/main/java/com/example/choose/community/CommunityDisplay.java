@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.choose.R;
@@ -15,12 +15,10 @@ import com.example.choose.api.PostController;
 import com.example.choose.dto.CommunityDTO;
 import com.example.choose.dto.GetCommunityFeedRequestDTO;
 import com.example.choose.dto.GetCommunityFeedResponseDTO;
-import com.example.choose.dto.GetFeedRequestDTO;
-import com.example.choose.dto.GetFeedResponseDTO;
-import com.example.choose.dto.PostDTO;
+import com.example.choose.home.HomeActivity;
 import com.example.choose.post.PostDisplay;
-import com.example.choose.recycler.post.CommunityFeedAdapter;
-import com.example.choose.recycler.post.RecyclerItemClickListener;
+import com.example.choose.recyclers.ClickListener;
+import com.example.choose.recyclers.FeedAdapter;
 import com.example.choose.retrofit.RetrofitUtils;
 
 import retrofit2.Call;
@@ -29,27 +27,50 @@ import retrofit2.Response;
 
 public class CommunityDisplay extends AppCompatActivity {
     PostController postController;
-    CommunityFeedAdapter adapter = new CommunityFeedAdapter();
+    CommunityDTO community;
+    Bundle extras;
+    String from;
+
+    FeedAdapter adapter = new FeedAdapter(new ClickListener() {
+        @Override
+        public void onPositionClicked(int position) {
+            Intent i = new Intent(CommunityDisplay.this, PostDisplay.class);
+            i.putExtra("post", adapter.localDataSet.get(position));
+            i.putExtra("from", "CommunityDisplay");
+            if(from.equals("CommunitiesFragment")) i.putExtra("from", "CommunityDisplayCF");
+            else i.putExtra("from", "CommunityDisplay");
+            i.putExtra("community", community);
+            startActivity(i);
+        }
+
+        @Override
+        public void onLongClicked(int position) {
+            //ToDo: Options
+        }
+    }, this);
     private RecyclerView recyclerView;
 
     int page;
+    String step;
     private boolean loading;
     int visibleItemCount;
     int totalItemCount;
-    int pastVisiblesItems;
+    int pastVisibleItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_display);
+        Button button = findViewById(R.id.sendBtn);
+        extras = getIntent().getExtras();
+        from = extras.getString("from");
+        community = (CommunityDTO) extras.getSerializable("community");
 
         TextView name = findViewById(R.id.name);
         TextView username = findViewById(R.id.username);
         recyclerView = findViewById(R.id.communities_recycle_view);
 
-        Bundle extras = getIntent().getExtras();
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        CommunityDTO community = (CommunityDTO) extras.getSerializable("community");
 
         name.setText(community.getName());
         username.setText(community.getUsername());
@@ -80,21 +101,15 @@ public class CommunityDisplay extends AppCompatActivity {
                     }
                 });
 
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        Intent i = new Intent(CommunityDisplay.this, PostDisplay.class);
-                        i.putExtra("post", adapter.localDataSet.get(position));
-                        i.putExtra("from", "CommunityDisplay");
-                        i.putExtra("community", community);
-                        startActivity(i);
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        //TODO: Options
-                    }
-                })
-        );
+        button.setOnClickListener(v -> {
+            if(from.equals("CommunitiesFragment")) {
+                Intent i = new Intent(CommunityDisplay.this, HomeActivity.class);
+                i.putExtra("fragment", 2);
+                startActivity(i);
+            }else {
+                startActivity(new Intent(CommunityDisplay.this, HomeActivity.class));
+            }
+        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -102,9 +117,9 @@ public class CommunityDisplay extends AppCompatActivity {
                 if (dy > 0) {
                     visibleItemCount = mLayoutManager.getChildCount();
                     totalItemCount = mLayoutManager.getItemCount();
-                    pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+                    pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition();
                     if (loading) {
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
                             loading = false;
                             postController
                                     .getCommunityFeed(new GetCommunityFeedRequestDTO(page++,10, community.getId().intValue()))

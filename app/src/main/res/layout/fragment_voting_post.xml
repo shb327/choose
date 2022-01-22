@@ -145,13 +145,29 @@
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-                        android:id="@+id/textin"
+                        android:id="@+id/textIn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:backgroundTint="#68B2A0"
                         android:drawableRight="@drawable/ic_round_close_24"
                         android:ems="16"
+                        android:fontFamily="@font/montserrat"
+                        android:hint="Option"
+                        android:inputType="textAutoCorrect"
+                        android:maxLength="32"
+                        android:textColor="#68B2A0"
+                        android:textColorHint="#68B2A0" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/textInTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:backgroundTint="#68B2A0"
+                        android:drawableRight="@drawable/ic_round_close_24"
+                        android:ems="16"
+                        android:layout_below="@+id/textIn"
                         android:fontFamily="@font/montserrat"
                         android:hint="Option"
                         android:inputType="textAutoCorrect"
@@ -185,16 +201,28 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="All Options should contain Text"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                app:layout_anchorGravity="bottom|center"
+                app:layout_constraintStart_toStartOf="@+id/options"
+                app:layout_constraintTop_toBottomOf="@+id/options" />
+
             <ImageView
                 android:id="@+id/tmpResult"
                 android:layout_width="348dp"
-                android:layout_height="88dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="2dp"
                 app:layout_anchorGravity="bottom|center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/options"
+                app:layout_constraintTop_toBottomOf="@+id/errorText"
                 app:srcCompat="@drawable/cube" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

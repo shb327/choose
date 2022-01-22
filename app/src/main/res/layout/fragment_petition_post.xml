@@ -96,20 +96,20 @@
                 android:layout_marginTop="38dp"
                 android:ems="16"
                 android:hint="Add a title"
-                android:inputType="textAutoCorrect"
-                android:textColor="#68B2A0"
-                android:textColorHint="#68B2A0"
-                app:boxStrokeColor="#68B2A0"
-                app:boxStrokeErrorColor="#F75010"
                 app:boxStrokeWidth="2dp"
                 app:counterMaxLength="20"
-                app:errorIconTint="@color/error"
-                app:errorTextColor="@color/error"
-                app:hintTextColor="#68B2A0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:boxStrokeColor="#68B2A0"
+                android:textColor="#68B2A0"
+                android:textColorHint="#68B2A0"
+                app:errorTextColor="@color/error"
+                android:inputType="textAutoCorrect"
+                app:hintTextColor="#68B2A0"
+                app:boxStrokeErrorColor="#F75010"
+                app:errorIconTint="@color/error">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/titleTxt"
@@ -121,6 +121,18 @@
                     android:textColor="#68B2A0"
                     android:textSize="18sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Please Upload an Image"
+                android:textColor="#FFF"
+                android:textSize="14sp"
+                app:layout_anchorGravity="bottom|center"
+                app:layout_constraintStart_toStartOf="@+id/block"
+                app:layout_constraintTop_toBottomOf="@+id/block" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descriptionLayout"
@@ -179,8 +191,10 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="120dp"
-                android:layout_height="104dp"
+                android:layout_width="111dp"
+                android:layout_height="94dp"
+                android:layout_marginTop="2dp"
+                android:scaleType="fitCenter"
                 app:layout_anchorGravity="bottom|center"
                 app:layout_constraintBottom_toBottomOf="@+id/block"
                 app:layout_constraintEnd_toEndOf="@+id/block"
@@ -194,7 +208,7 @@
                 android:id="@+id/textView"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="104dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Choose Image to Upload"
                 android:textAlignment="center"
@@ -266,13 +280,13 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:text="Goal(optional):"
-                        android:id="@+id/goalTxt"
                         android:fontFamily="@font/montserrat"
+                        android:text="Goal(optional):"
                         android:textColor="#68B2A0"
                         android:textSize="16sp" />
                 </RelativeLayout>
@@ -283,6 +297,7 @@
 
                     <com.google.android.material.slider.Slider
                         android:id="@+id/slider"
+                        style="@style/Myslider"
                         android:layout_width="348dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -290,7 +305,6 @@
                         android:valueFrom="0.0"
                         android:valueTo="1000.0"
                         app:layout_anchorGravity="bottom|center"
-                        style="@style/Myslider"
                         app:thumbColor="#68B2A0"
                         app:trackColorActive="#68B2A0"
                         app:trackColorInactive="#E0ECDE" />

@@ -38,18 +38,18 @@
                         android:padding="14dp">
 
                         <FrameLayout
-                            android:layout_width="48dp"
-                            android:layout_height="48dp">
+                            android:layout_width="44dp"
+                            android:layout_height="44dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
                                 android:layout_gravity="center|center"
                                 app:srcCompat="@drawable/ic_round_space_dashboard_24" />
 
                             <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
                                 app:srcCompat="@drawable/community_empty_circle" />
                         </FrameLayout>
                     </LinearLayout>
@@ -73,10 +73,30 @@
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="1dp"
                             android:text="username"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="#205072" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/leave"
+                            style="@style/Widget.App.Button.OutlinedButton.Icon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="8dp"
+                            app:icon="@drawable/ic_round_close_24"
+                            app:iconGravity="textStart"
+                            app:iconSize="22dp"
+                            app:iconTint="#329D9C"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                            app:strokeColor="#329D9C" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

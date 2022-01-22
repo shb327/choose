@@ -12,19 +12,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.choose.R;
-import com.example.choose.dto.CreatePostRequestDTO;
+import com.example.choose.api.PostController;
 import com.example.choose.dto.PostDTO;
 import com.example.choose.home.HomeActivity;
+import com.example.choose.retrofit.RetrofitUtils;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,8 +40,19 @@ public class ImagePostFragment extends Fragment {
 
     public ImagePostFragment() { }
 
-    ImageView tmp;
+    TextInputEditText titleText;
+    TextInputEditText descriptionText;
+    TextInputLayout titleLayout;
+    TextInputLayout descriptionLayout;
+    ImageView res;
     Button button;
+    Button gallery;
+    Button camera;
+    ImageView block;
+    TextView textView;
+    TextView errorText;
+    MultipartBody.Part body;
+    boolean uploaded;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,23 +63,37 @@ public class ImagePostFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = data.getData();
-        tmp.setImageURI(uri);
+        res.setImageURI(uri);
+        File file = FileUtils.getFile(getContext(), uri);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("uri"), file);
+        body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        uploaded = true;
+        gallery.setClickable(false);
+        camera.setClickable(false);
+        block.setClickable(false);
+        errorText.setTextColor(Color.parseColor("#fff"));
+        block.setImageResource(R.drawable.upload);
+        textView.setText("Very Good Image");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        uploaded = false;
         View inflate =  inflater.inflate(R.layout.fragment_image_post, container, false);
         button = inflate.findViewById(R.id.sendBtn);
+        PostController postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
 
-        TextInputEditText descriptionTxt = inflate.findViewById(R.id.descriptionTxt);
-        TextInputLayout descriptionLayout = inflate.findViewById(R.id.descriptionLayout);
-        TextInputEditText titleTxt = inflate.findViewById(R.id.titleTxt);
-        TextInputLayout titleLayout = inflate.findViewById(R.id.titleLayout);
+        descriptionText = inflate.findViewById(R.id.descriptionTxt);
+        descriptionLayout = inflate.findViewById(R.id.descriptionLayout);
+        titleText = inflate.findViewById(R.id.titleTxt);
+        titleLayout = inflate.findViewById(R.id.titleLayout);
 
-        tmp = inflate.findViewById(R.id.tmpResult);
-        Button gallery = inflate.findViewById(R.id.gallery);
-        Button camera = inflate.findViewById(R.id.camera);
-        ImageView block = inflate.findViewById(R.id.block);
+        res = inflate.findViewById(R.id.imageView3);
+        gallery = inflate.findViewById(R.id.gallery);
+        camera = inflate.findViewById(R.id.camera);
+        block = inflate.findViewById(R.id.block);
+        textView = inflate.findViewById(R.id.textView);
+        errorText = inflate.findViewById(R.id.errorText);
 
         block.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,25 +122,68 @@ public class ImagePostFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                postController.createTextPost(new CreatePostRequestDTO(
-//                        editText2.getText().toString(),
-//                        editText1.getText().toString()))
-//                        .enqueue(new Callback<PostDTO>() {
-//                            @Override
-//                            public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
-//                                startActivity(new Intent(inflate.getContext(), HomeActivity.class));
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<PostDTO> call, Throwable t) {
-//                                Toast.makeText(inflate.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
+                if ((titleText.getText().length() == 0) && (descriptionText.getText().length() == 0) && !uploaded) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("The description cannot be empty");
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    errorText.setTextColor(Color.parseColor("#F75010"));
+                    block.setImageResource(R.drawable.upload_red);
+                    return;
+                } else if ((titleText.getText().length() == 0) && (descriptionText.getText().length() == 0)) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("The description cannot be empty");
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    return;
+                } else if (titleText.getText().length() == 0) {
+                    titleLayout.setErrorEnabled(true);
+                    titleLayout.setError("The title cannot be empty");
+                    titleLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
+                    return;
+                } else if (descriptionText.getText().length() == 0) {
+                    descriptionLayout.setErrorEnabled(true);
+                    descriptionLayout.setError("The description cannot be empty");
+                    descriptionLayout.setDefaultHintTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
+                    return;
+                }else if (!uploaded) {
+                    errorText.setTextColor(Color.parseColor("#F75010"));
+                    block.setImageResource(R.drawable.upload_red);
+                    return;
+                } else if (descriptionLayout.isErrorEnabled()) { return;
+                } else if (titleLayout.isErrorEnabled()) { return;
+                }
+
+                postController.createImagePost(titleText.getText().toString(),
+                        descriptionText.getText().toString(), body)
+                        .enqueue(new Callback<PostDTO>() {
+                        @Override
+                        public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
+                            startActivity(new Intent(inflate.getContext(), HomeActivity.class));
+                        }
+
+                        @Override
+                        public void onFailure(Call<PostDTO> call, Throwable t) {
+                            Toast.makeText(inflate.getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                });;
             }
         });
 
-
-        descriptionTxt.addTextChangedListener(new TextWatcher() {
+        descriptionText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -117,22 +192,23 @@ public class ImagePostFragment extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if(descriptionTxt.getText().length()>256){
+                if(descriptionText.getText().length()>256){
                     descriptionLayout.setErrorEnabled(true);
                     descriptionLayout.setError("Character limit exceeded");
-                    descriptionTxt.setTextColor(Color.parseColor("#F75010"));
+                    descriptionText.setTextColor(Color.parseColor("#F75010"));
                     descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#F75010")));
-                }
-                else {
+                } else {
                     descriptionLayout.setErrorEnabled(false);
                     descriptionLayout.setError(null);
-                    descriptionTxt.setTextColor(Color.parseColor("#68B2A0"));
+                    descriptionText.setTextColor(Color.parseColor("#68B2A0"));
+                    descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
+                    descriptionLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                     descriptionLayout.setCounterTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
             }
         });
 
-        titleTxt.addTextChangedListener(new TextWatcher() {
+        titleText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -141,15 +217,16 @@ public class ImagePostFragment extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if(titleTxt.getText().length()==20){
+                if(titleText.getText().length()==20){
                     titleLayout.setErrorEnabled(true);
                     titleLayout.setError("Character limit exceeded");
-                    titleTxt.setTextColor(Color.parseColor("#F75010"));
+                    titleText.setTextColor(Color.parseColor("#F75010"));
                 }
                 else {
                     titleLayout.setErrorEnabled(false);
                     titleLayout.setError(null);
-                    titleTxt.setTextColor(Color.parseColor("#68B2A0"));
+                    titleText.setTextColor(Color.parseColor("#68B2A0"));
+                    titleLayout.setHintTextColor(ColorStateList.valueOf(Color.parseColor("#68B2A0")));
                 }
             }
         });

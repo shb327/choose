@@ -29,10 +29,13 @@ public class ChooseType extends AppCompatActivity {
     private static BackdropContainer backdropContainer;
     private static boolean fragmentSelected;
 
+    public static Context contextOfApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_type);
+        contextOfApplication = getApplicationContext();
 
         fragmentSelected = false;
 
@@ -156,6 +159,10 @@ public class ChooseType extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
     }
 
     public static void close(){

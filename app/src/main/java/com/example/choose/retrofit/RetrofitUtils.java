@@ -75,4 +75,9 @@ public class RetrofitUtils {
         accountManager.addAccountExplicitly(account, password, null);
         accountManager.setAuthToken(account, TYPE_ACCOUNT, null);
     }
+
+    public String getUsername(){
+        Account account = accountManager.getAccountsByType(TYPE_ACCOUNT)[0];
+        return account.name;
+    }
 }

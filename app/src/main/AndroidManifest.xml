@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Choose"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".user.UserDisplay"
+            android:exported="false" />
+        <activity
             android:name=".community.CommunityDisplay"
             android:exported="false" />
         <activity
