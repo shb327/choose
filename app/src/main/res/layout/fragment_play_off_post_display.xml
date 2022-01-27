@@ -21,10 +21,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="328dp"
         android:layout_height="60dp"
+        android:layout_below="@+id/desc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Play"
-        android:layout_below="@+id/desc"
         android:textColor="#329D9C"
         app:strokeColor="#329D9C"
         app:strokeWidth="2dp" />
@@ -34,10 +34,10 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="328dp"
         android:layout_height="60dp"
+        android:layout_below="@+id/play"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="Statistics"
-        android:layout_below="@+id/play"
         android:textColor="#329D9C"
         app:strokeColor="#329D9C"
         app:strokeWidth="2dp" />

@@ -11,10 +11,11 @@ public class PlayOffOptionDTO implements Serializable {
 
     public PlayOffOptionDTO(){ }
 
-    public PlayOffOptionDTO(Long id, String title, Integer votedUsers, Boolean voted) {
+    public PlayOffOptionDTO(Long id, String title, Integer votedUsers, Boolean voted, String media) {
         this.id = id;
         this.title = title;
         this.votedUsers = votedUsers;
+        this.media = media;
         this.voted = voted;
     }
 
@@ -48,6 +49,14 @@ public class PlayOffOptionDTO implements Serializable {
 
     public void setVoted(Boolean voted) {
         this.voted = voted;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
     }
 
     @Override

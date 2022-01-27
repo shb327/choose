@@ -45,14 +45,11 @@ public class CommunitiesFragment extends Fragment {
     private RecyclerView recyclerView;
     CommunityController communityController;
 
-    int page;
-
     public CommunitiesFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = 0;
         communityController = RetrofitUtils
                 .getInstance()
                 .getRetrofit()

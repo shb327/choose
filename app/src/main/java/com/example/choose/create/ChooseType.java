@@ -1,7 +1,5 @@
 package com.example.choose.create;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -9,13 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 
 import com.evolve.backdroplibrary.BackdropContainer;
 import com.example.choose.R;
@@ -46,7 +40,7 @@ public class ChooseType extends AppCompatActivity {
 
         MenuItem item1 = bottomNavigationView.getMenu().findItem(R.id.home);
         MenuItem item2 = bottomNavigationView.getMenu().findItem(R.id.communities);
-        MenuItem item3 = bottomNavigationView.getMenu().findItem(R.id.notifications);
+        MenuItem item3 = bottomNavigationView.getMenu().findItem(R.id.discover);
         MenuItem item4 = bottomNavigationView.getMenu().findItem(R.id.profile);
 
         item4.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

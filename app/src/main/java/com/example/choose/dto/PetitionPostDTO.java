@@ -7,19 +7,19 @@ public class PetitionPostDTO extends PostDTO {
     private Integer votedCount;
     private Boolean voted;
 
-    public PetitionPostDTO() { }
-
     public PetitionPostDTO(Long id,
                            Long authorId,
                            String authorUsername,
                            String title,
                            PostType type,
+                           Integer likesCount,
+                           LikeStatus likeStatus,
                            String mediaUrl,
                            String description,
                            Integer goal,
                            Integer votedCount,
                            Boolean voted) {
-        super(id, authorId, authorUsername, title, type);
+        super(id, authorId, authorUsername, title, type, likesCount, likeStatus);
         this.mediaUrl = mediaUrl;
         this.description = description;
         this.goal = goal;

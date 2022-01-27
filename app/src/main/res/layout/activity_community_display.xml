@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:paddingTop="28dp"
         android:clipToPadding="false"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="110dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true" />
 
@@ -122,6 +122,19 @@
                 android:fontFamily="@font/montserrat"
                 android:text="communityusername"
                 android:textColor="#68B2A0"
+                android:textSize="16sp"
+
+                app:layout_anchor="@+id/nestedScrollView" />
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingTop="2dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Community Description"
+                android:textColor="#205072"
                 android:textSize="16sp"
                 android:layout_marginBottom="8dp"
                 app:layout_anchor="@+id/nestedScrollView" />

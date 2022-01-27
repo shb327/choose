@@ -1,4 +1,4 @@
-package com.example.choose.home.user;
+package com.example.choose.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,20 +29,7 @@ public class DiscoverFragment extends Fragment {
 
     public DiscoverFragment() { }
 
-    private final DiscoverCommunityAdapter adapter = new DiscoverCommunityAdapter(new ClickListener() {
-        @Override
-        public void onPositionClicked(int position) {
-            Intent i = new Intent(getContext(), CommunityDisplay.class);
-            i.putExtra("from", "DiscoverFragment");
-            i.putExtra("community", adapter.localDataSet.get(position));
-            startActivity(i);
-        }
-
-        @Override
-        public void onLongClicked(int position) {
-
-        }
-    });
+    private DiscoverCommunityAdapter adapter;
 
     private RecyclerView recyclerView;
     int visibleItemCount;
@@ -55,6 +42,20 @@ public class DiscoverFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new DiscoverCommunityAdapter(new ClickListener() {
+            @Override
+            public void onPositionClicked(int position) {
+                Intent i = new Intent(getContext(), CommunityDisplay.class);
+                i.putExtra("from", "DiscoverFragment");
+                i.putExtra("community", adapter.localDataSet.get(position));
+                startActivity(i);
+            }
+
+            @Override
+            public void onLongClicked(int position) {
+
+            }
+        });
         page = 0;
         loading = true;
         communityController = RetrofitUtils
@@ -87,8 +88,10 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_discover, container, false);
         recyclerView = inflate.findViewById(R.id.discover_recycle_view);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

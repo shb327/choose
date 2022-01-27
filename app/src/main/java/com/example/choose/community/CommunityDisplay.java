@@ -36,8 +36,7 @@ public class CommunityDisplay extends AppCompatActivity {
         public void onPositionClicked(int position) {
             Intent i = new Intent(CommunityDisplay.this, PostDisplay.class);
             i.putExtra("post", adapter.localDataSet.get(position));
-            i.putExtra("from", "CommunityDisplay");
-            if(from.equals("CommunitiesFragment")) i.putExtra("from", "CommunityDisplayCF");
+            if(from.equals("CommunitiesFragment")){ i.putExtra("from", "CommunityDisplayCF"); }
             else i.putExtra("from", "CommunityDisplay");
             i.putExtra("community", community);
             startActivity(i);
@@ -68,12 +67,14 @@ public class CommunityDisplay extends AppCompatActivity {
 
         TextView name = findViewById(R.id.name);
         TextView username = findViewById(R.id.username);
+        TextView description = findViewById(R.id.description);
         recyclerView = findViewById(R.id.communities_recycle_view);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 
         name.setText(community.getName());
         username.setText(community.getUsername());
+        description.setText(community.getDescription());
 
         postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
         loading = true;
@@ -101,14 +102,16 @@ public class CommunityDisplay extends AppCompatActivity {
                     }
                 });
 
+
+        System.out.println(from);
         button.setOnClickListener(v -> {
+            Intent i = new Intent(CommunityDisplay.this, HomeActivity.class);
             if(from.equals("CommunitiesFragment")) {
-                Intent i = new Intent(CommunityDisplay.this, HomeActivity.class);
                 i.putExtra("fragment", 2);
-                startActivity(i);
             }else {
-                startActivity(new Intent(CommunityDisplay.this, HomeActivity.class));
+                i.putExtra("fragment", 1);
             }
+            startActivity(i);
         });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

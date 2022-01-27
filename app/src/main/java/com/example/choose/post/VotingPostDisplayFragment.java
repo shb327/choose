@@ -74,8 +74,7 @@ public class VotingPostDisplayFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
-        postController
-                .getPost(id).enqueue(new Callback<PostDTO>() {
+        postController.getPost(id).enqueue(new Callback<PostDTO>() {
             @Override
             public void onResponse(Call<PostDTO> call, Response<PostDTO> response) {
                 for (VotingOptionDTO votingOptionDTO: (((VotingPostDTO) response.body()).getOptions()))

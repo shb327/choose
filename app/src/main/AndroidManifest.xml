@@ -20,6 +20,21 @@
         android:theme="@style/Theme.Choose"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".community.CreateCommunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".community.EditCommunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".play.PlayOffPlayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".play.PlayOffStatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.UserDisplay"
             android:exported="false" />
         <activity

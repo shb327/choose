@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.choose.R;
 import com.example.choose.api.PostController;
+import com.example.choose.community.CreateCommunityActivity;
 import com.example.choose.dto.GetFeedRequestDTO;
 import com.example.choose.dto.GetFeedResponseDTO;
 import com.example.choose.post.PostDisplay;
@@ -24,12 +28,13 @@ import com.example.choose.recyclers.ClickListener;
 import com.example.choose.recyclers.FeedAdapter;
 import com.example.choose.retrofit.RetrofitUtils;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
 
     public FeedFragment() { }
 
@@ -60,9 +65,7 @@ public class FeedFragment extends Fragment {
             }
 
             @Override
-            public void onLongClicked(int position) {
-
-            }
+            public void onLongClicked(int position) { }
         }, this.getActivity());
         postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
         loading = true;
@@ -94,12 +97,11 @@ public class FeedFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_feed, container, false);
         recyclerView = inflate.findViewById(R.id.feed_recycle_view);
 
-        TextView welcome = inflate.findViewById(R.id.welcome);
-
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
         MaterialToolbar toolbar = inflate.findViewById(R.id.topAppBar);
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitleTextAppearance(inflate.getContext(), R.style.MontserratBoldTextAppearance);
 
@@ -110,8 +112,11 @@ public class FeedFragment extends Fragment {
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.main_green));
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        recyclerView.setAdapter(adapter);
 
+        NavigationView navigationView = inflate.findViewById(R.id.nav_view);
+        setNavigationViewListener(inflate);
+
+        recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -149,5 +154,33 @@ public class FeedFragment extends Fragment {
             }
         });
         return inflate;
+    }
+
+    private void setNavigationViewListener(View view) {
+        NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent i = new Intent(getContext(), SettingsActivity.class);
+        switch (item.getItemId()) {
+            case R.id.delete:
+                i.putExtra("from", "Delete");
+                startActivity(i);
+                break;
+            case  R.id.communities:
+                i.putExtra("from", "Edit");
+                startActivity(i);
+                break;
+            case R.id.create:
+                Intent intent = new Intent(getContext(), CreateCommunityActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logout:
+                break;
+        }
+
+        return true;
     }
 }

@@ -86,59 +86,70 @@
         app:titleCentered="true"
         app:titleTextColor="#205072">
 
-        <FrameLayout
-            android:layout_width="48dp"
-            android:layout_height="48dp">
-            <ImageView
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp">
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    app:srcCompat="@drawable/ic_round_person_24"
+                    android:layout_gravity="center|center"/>
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:srcCompat="@drawable/empty_circle"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textPost"
+                android:paddingTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_horizontal"
+                android:paddingLeft="14dp"
+                android:text="Text Post"
+                android:textColor="#68B2A0"
+                android:textSize="24sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sendBtn"
+                style="@style/Widget.App.Button.OutlinedButton.Icon"
+                android:backgroundTint="#68B2A0"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                app:srcCompat="@drawable/ic_round_person_24"
-                android:layout_gravity="center|center"/>
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/empty_circle"/>
-        </FrameLayout>
+                app:icon="@drawable/ic_round_arrow_upward_24"
+                app:iconGravity="textStart"
+                app:iconSize="24dp"
+                app:iconTint="#E0ECDE"
+                app:strokeWidth="2dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                app:strokeColor="#68B2A0" />
 
-        <TextView
-            android:id="@+id/textPost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:gravity="center_horizontal"
-            android:paddingLeft="14dp"
-            android:text="Text Post"
-            android:textColor="#68B2A0"
-            android:textSize="24sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/sendBtn"
-            android:layout_marginLeft="136dp"
-            style="@style/Widget.App.Button.OutlinedButton.Icon"
-            android:backgroundTint="#68B2A0"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            app:icon="@drawable/ic_round_arrow_upward_24"
-            app:iconGravity="textStart"
-            app:iconSize="24dp"
-            app:iconTint="#E0ECDE"
-            app:strokeWidth="2dp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
-            app:strokeColor="#68B2A0" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/closeBtn"
-            android:layout_marginLeft="14dp"
-            style="@style/Widget.App.Button.OutlinedButton.Icon"
-            android:backgroundTint="#68B2A0"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            app:icon="@drawable/ic_round_close_24"
-            app:iconGravity="textStart"
-            app:iconSize="24dp"
-            app:iconTint="#E0ECDE"
-            app:strokeWidth="2dp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
-            app:strokeColor="#68B2A0" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/closeBtn"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                style="@style/Widget.App.Button.OutlinedButton.Icon"
+                android:backgroundTint="#68B2A0"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                app:icon="@drawable/ic_round_close_24"
+                app:iconGravity="textStart"
+                app:iconSize="24dp"
+                app:iconTint="#E0ECDE"
+                app:strokeWidth="2dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+                app:strokeColor="#68B2A0" />
+        </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

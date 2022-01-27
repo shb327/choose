@@ -5,8 +5,15 @@ public class TextPostDTO extends PostDTO{
 
     public TextPostDTO() { }
 
-    public TextPostDTO(Long id, Long authorId, String authorUsername, String title, PostType type, String content) {
-        super(id, authorId, authorUsername, title, type);
+    public TextPostDTO(Long id,
+                       Long authorId,
+                       String authorUsername,
+                       String title,
+                       PostType type,
+                       Integer likesCount,
+                       LikeStatus likeStatus,
+                       String content) {
+        super(id, authorId, authorUsername, title, type, likesCount, likeStatus);
         this.content = content;
     }
 

@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import com.example.choose.create.ChooseType;
 import com.example.choose.R;
-import com.example.choose.home.user.PersonalPageFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,15 +25,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        BottomAppBar bar = findViewById(R.id.bottomAppBar);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         item1 = bottomNavigationView.getMenu().findItem(R.id.home);
         item2 = bottomNavigationView.getMenu().findItem(R.id.communities);
-        item3 = bottomNavigationView.getMenu().findItem(R.id.notifications);
+        item3 = bottomNavigationView.getMenu().findItem(R.id.discover);
         item4 = bottomNavigationView.getMenu().findItem(R.id.profile);
 
         MenuItem empty = bottomNavigationView.getMenu().findItem(R.id.itemEmpty);
@@ -83,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                 item4.setChecked(true);
                 break;
             case 1:
-                showFragment(new NotificationsFragment(), position);
+                showFragment(new DiscoverFragment(), position);
                 item3.setChecked(true);
                 break;
             case 2:

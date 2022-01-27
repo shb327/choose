@@ -171,6 +171,7 @@ public class VotingPostFragment extends Fragment {
                             if (event.getAction() == MotionEvent.ACTION_UP) {
                                 if (event.getRawX() >= (textOut.getRight() - textOut.getCompoundDrawables()[2].getBounds().width())) {
                                     ((LinearLayout) addView.getParent()).removeView(addView);
+                                    counter[0]--;
                                     return true;
                                 }
                             }

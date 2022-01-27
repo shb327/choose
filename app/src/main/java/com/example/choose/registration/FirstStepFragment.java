@@ -75,7 +75,7 @@ public class FirstStepFragment extends Fragment {
                     username.setErrorEnabled(true);
                     username.setError("Character Limit Exceeded");
                     field.setTextColor(Color.parseColor("#F75010"));
-                }else if(!field.getText().toString().matches("^[a-zA-Z0-9._-]{3,}$")){
+                }else if(!field.getText().toString().matches("^[a-z0-9._-]{3,}$")){
                     username.setErrorEnabled(true);
                     username.setError("Invalid Username");
                     field.setTextColor(Color.parseColor("#F75010"));

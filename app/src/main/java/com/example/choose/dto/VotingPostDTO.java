@@ -1,20 +1,20 @@
 package com.example.choose.dto;
 
 import java.util.List;
-import java.util.Set;
 
 public class VotingPostDTO extends PostDTO{
     private List<VotingOptionDTO> options;
 
-    public VotingPostDTO() { }
-
-    public VotingPostDTO(Long id, Long authorId, String authorUsername, String title, PostType type, List<VotingOptionDTO> options) {
-        super(id, authorId, authorUsername, title, type);
+    public VotingPostDTO(Long id,
+                         Long authorId,
+                         String authorUsername,
+                         String title,
+                         PostType type,
+                         Integer likesCount,
+                         LikeStatus likeStatus,
+                         List<VotingOptionDTO> options) {
+        super(id, authorId, authorUsername, title, type, likesCount, likeStatus);
         this.options = options;
-    }
-
-    public VotingPostDTO(Long id, Long authorId, String authorUsername, String title, PostType type) {
-        super(id, authorId, authorUsername, title, type);
     }
 
     public List<VotingOptionDTO> getOptions() {

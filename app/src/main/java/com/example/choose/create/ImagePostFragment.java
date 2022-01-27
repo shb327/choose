@@ -71,7 +71,7 @@ public class ImagePostFragment extends Fragment {
         gallery.setClickable(false);
         camera.setClickable(false);
         block.setClickable(false);
-        errorText.setTextColor(Color.parseColor("#fff"));
+        errorText.setTextColor(Color.parseColor("#ffffff"));
         block.setImageResource(R.drawable.upload);
         textView.setText("Very Good Image");
     }

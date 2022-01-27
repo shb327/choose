@@ -7,6 +7,7 @@ import com.example.choose.dto.GetCommunityFeedResponseDTO;
 import com.example.choose.dto.GetFeedRequestDTO;
 import com.example.choose.dto.GetFeedResponseDTO;
 import com.example.choose.dto.GetUserFeedRequestDTO;
+import com.example.choose.dto.LikeStatus;
 import com.example.choose.dto.PostDTO;
 
 import okhttp3.MultipartBody;
@@ -60,6 +61,9 @@ public interface PostController {
 
     @POST("/api/posts/feed/self")
     Call<GetFeedResponseDTO> getSelfFeed (@Body GetFeedRequestDTO getFeedRequestDTO);
+
+    @POST("/api/posts/like/{id}")
+    Call<Void> like (@Path("id") int id, @Query("status") LikeStatus status);
 
     @DELETE("/api/posts/{id}")
     Call<Void> deletePost (@Path("id") int id);

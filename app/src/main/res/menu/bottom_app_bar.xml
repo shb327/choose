@@ -19,9 +19,9 @@
         android:title="" />
 
     <item
-        android:id="@+id/notifications"
-        android:icon="@drawable/ic_round_notifications_24"
-        android:title="Notifications"
+        android:id="@+id/discover"
+        android:icon="@drawable/ic_round_explore_24"
+        android:title="Discover"
         app:showAsAction="ifRoom"
         />
 
