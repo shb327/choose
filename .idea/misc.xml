@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/add_option.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/background_transparent.xml" value="0.4041666666666667" />
         <entry key="app/src/main/res/drawable/button_bg_round.xml" value="0.1986842105263158" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/community_empty_circle.xml" value="0.25526315789473686" />
         <entry key="app/src/main/res/drawable/cube.xml" value="0.14901315789473685" />
         <entry key="app/src/main/res/drawable/empty_circle _white.xml" value="0.25526315789473686" />
@@ -66,6 +67,7 @@
         <entry key="app/src/main/res/drawable/transparent.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/transparent_cener.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/transparent_center.xml" value="0.25276872964169383" />
+        <entry key="app/src/main/res/drawable/transparent_circle.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/transparent_left.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/transparent_right.xml" value="0.25276872964169383" />
         <entry key="app/src/main/res/drawable/underline.xml" value="0.25276872964169383" />
@@ -156,6 +158,7 @@
         <entry key="app/src/main/res/layout/text_row_item.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/voting_post_feed_row_item.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/layout/voting_row.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/winner_activity.xml" value="0.24267100977198697" />
         <entry key="app/src/main/res/menu/bottom_app_bar.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/drawer_menu.xml" value="0.2450657894736842" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.3267543859649123" />

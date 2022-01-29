@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -52,6 +53,7 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Registration.this, LoginActivity.class));
+                RetrofitUtils.getInstance().deleteAccountManager(AccountManager.get(Registration.this));
             }
         });
 

@@ -23,8 +23,7 @@ public class RetrofitUtils {
     private Retrofit retrofit;
     private AccountManager accountManager;
 
-    private RetrofitUtils() {
-    }
+    private RetrofitUtils() { }
 
     public static RetrofitUtils getInstance() {
         return INSTANCE;
@@ -68,6 +67,10 @@ public class RetrofitUtils {
 
     public void setAccountManager(AccountManager accountManager) {
         this.accountManager = accountManager;
+    }
+
+    public void deleteAccountManager(AccountManager accountManager) {
+        accountManager.removeAccount(accountManager.getAccountsByType(TYPE_ACCOUNT)[0], null, null);
     }
 
     public void login(String login, String password) {

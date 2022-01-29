@@ -79,6 +79,8 @@
         android:inputType="textPassword"
         android:hint="Enter Password"
         android:layout_below="@+id/outlinedTextField1"
+        app:endIconMode="password_toggle"
+        app:endIconTint="#56C596"
         android:layout_centerHorizontal="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
@@ -105,6 +107,8 @@
         app:errorIconTint="@color/error"
         app:errorTextColor="@color/error"
         android:inputType="textPassword"
+        app:endIconMode="password_toggle"
+        app:endIconTint="#56C596"
         android:hint="Confirm Password"
         android:layout_below="@+id/outlinedTextField2"
         android:layout_centerHorizontal="true"

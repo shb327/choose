@@ -1,17 +1,16 @@
 package com.example.choose.recyclers;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +27,7 @@ import com.example.choose.dto.PostType;
 import com.example.choose.dto.TextPostDTO;
 import com.example.choose.dto.VotingOptionDTO;
 import com.example.choose.dto.VotingPostDTO;
+import com.example.choose.play.PlayOffPlayActivity;
 import com.example.choose.post.DownloadImageTask;
 import com.example.choose.retrofit.RetrofitUtils;
 
@@ -115,16 +115,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 textPostViewHolder.getAuthor().setText("by " + post.getAuthorUsername());
                 textPostViewHolder.getLikeCount().setText(String.valueOf(post.getLikesCount().intValue()));
                 if(post.getLikeStatus() != null){
-                    switch (post.getLikeStatus()){
-                        case LIKE:
-                            textPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            textPostViewHolder.getLike().setImageResource(R.drawable.fnh);
-                            break;
-                        case DISLIKE:
-                            textPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            textPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
-                            break;
+                    if(post.getLikeStatus().equals(LikeStatus.LIKE)){
+                        textPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        textPostViewHolder.getLike().setImageResource(R.drawable.fnh);
+                        textPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    }else {
+                        textPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        textPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
+                        textPostViewHolder.getLike().setImageResource(R.drawable.onh);
                     }
+                }else{
+                    textPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    textPostViewHolder.getLike().setImageResource(R.drawable.onh);
                 }
                 TextPostDTO textPostDTO = ((TextPostDTO) post);
                 textPostViewHolder.getDescription().setText(textPostDTO.getContent());
@@ -136,16 +138,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 imagePostViewHolder.getAuthor().setText("by " + post.getAuthorUsername());
                 imagePostViewHolder.getLikeCount().setText(String.valueOf(post.getLikesCount().intValue()));
                 if(post.getLikeStatus() != null){
-                    switch (post.getLikeStatus()){
-                        case LIKE:
-                            imagePostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            imagePostViewHolder.getLike().setImageResource(R.drawable.fnh);
-                            break;
-                        case DISLIKE:
-                            imagePostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            imagePostViewHolder.getDislike().setImageResource(R.drawable.fbh);
-                            break;
+                    if(post.getLikeStatus().equals(LikeStatus.LIKE)){
+                        imagePostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        imagePostViewHolder.getLike().setImageResource(R.drawable.fnh);
+                        imagePostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    }else {
+                        imagePostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        imagePostViewHolder.getDislike().setImageResource(R.drawable.fbh);
+                        imagePostViewHolder.getLike().setImageResource(R.drawable.onh);
                     }
+                }else{
+                    imagePostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    imagePostViewHolder.getLike().setImageResource(R.drawable.onh);
                 }
                 ImagePostDTO imagePostDTO = ((ImagePostDTO) post);
                 imagePostViewHolder.getDescription().setText(imagePostDTO.getDescription());
@@ -158,16 +162,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 petitionPostViewHolder.getAuthor().setText("by " + post.getAuthorUsername());
                 petitionPostViewHolder.getLikeCount().setText(String.valueOf(post.getLikesCount().intValue()));
                 if(post.getLikeStatus() != null){
-                    switch (post.getLikeStatus()){
-                        case LIKE:
-                            petitionPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            petitionPostViewHolder.getLike().setImageResource(R.drawable.fnh);
-                            break;
-                        case DISLIKE:
-                            petitionPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            petitionPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
-                            break;
+                    if(post.getLikeStatus().equals(LikeStatus.LIKE)){
+                        petitionPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        petitionPostViewHolder.getLike().setImageResource(R.drawable.fnh);
+                        petitionPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    }else {
+                        petitionPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        petitionPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
+                        petitionPostViewHolder.getLike().setImageResource(R.drawable.onh);
                     }
+                }else{
+                    petitionPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    petitionPostViewHolder.getLike().setImageResource(R.drawable.onh);
                 }
                 PetitionPostDTO petitionPostDTO = ((PetitionPostDTO) post);
                 petitionPostViewHolder.getDescription().setText(petitionPostDTO.getDescription());
@@ -191,16 +197,18 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 votingPostViewHolder.getLikeCount().setText(String.valueOf(post.getLikesCount().intValue()));
                 votingPostViewHolder.setPostDTO(post);
                 if(post.getLikeStatus() != null){
-                    switch (post.getLikeStatus()){
-                        case LIKE:
-                            votingPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            votingPostViewHolder.getLike().setImageResource(R.drawable.fnh);
-                            break;
-                        case DISLIKE:
-                            votingPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            votingPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
-                            break;
+                    if(post.getLikeStatus().equals(LikeStatus.LIKE)){
+                        votingPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        votingPostViewHolder.getLike().setImageResource(R.drawable.fnh);
+                        votingPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    }else {
+                        votingPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        votingPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
+                        votingPostViewHolder.getLike().setImageResource(R.drawable.onh);
                     }
+                }else{
+                    votingPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    votingPostViewHolder.getLike().setImageResource(R.drawable.onh);
                 }
                 VotingAdapter adapter;
                 postController = RetrofitUtils
@@ -243,22 +251,23 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             case 5:
                 PlayOffPostViewHolder playOffPostViewHolder = ((PlayOffPostViewHolder) holder);
                 playOffPostViewHolder.getTitle().setText(post.getTitle());
+                playOffPostViewHolder.setPostDTO(post);
                 playOffPostViewHolder.getAuthor().setText("by " + post.getAuthorUsername());
                 playOffPostViewHolder.getLikeCount().setText(String.valueOf(post.getLikesCount().intValue()));
                 if(post.getLikeStatus() != null){
-                    switch (post.getLikeStatus()){
-                        case LIKE:
-                            playOffPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            playOffPostViewHolder.getLike().setImageResource(R.drawable.fnh);
-                            break;
-                        case DISLIKE:
-                            playOffPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
-                            playOffPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
-                            break;
+                    if(post.getLikeStatus().equals(LikeStatus.LIKE)){
+                        playOffPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        playOffPostViewHolder.getLike().setImageResource(R.drawable.fnh);
+                        playOffPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    }else {
+                        playOffPostViewHolder.getLikeCount().setTextColor(Color.parseColor("#205072"));
+                        playOffPostViewHolder.getDislike().setImageResource(R.drawable.fbh);
+                        playOffPostViewHolder.getLike().setImageResource(R.drawable.onh);
                     }
+                }else{
+                    playOffPostViewHolder.getDislike().setImageResource(R.drawable.obh);
+                    playOffPostViewHolder.getLike().setImageResource(R.drawable.onh);
                 }
-                PlayOffPostDTO playOffPostDTO = ((PlayOffPostDTO) post);
-                playOffPostViewHolder.setPostDTO(post);
                 break;
         }
     }
@@ -333,17 +342,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
             if (v.getId() == like.getId()) {
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.LIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
@@ -377,17 +398,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 }
             }else if (v.getId() == dislike.getId()){
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.DISLIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
@@ -409,7 +442,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
                             Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
@@ -497,17 +530,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
             if (v.getId() == like.getId()) {
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.LIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
@@ -541,17 +586,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 }
             }else if (v.getId() == dislike.getId()){
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.DISLIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
@@ -573,7 +630,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
                             Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
@@ -685,17 +742,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                         });
             }else if (v.getId() == like.getId()) {
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.LIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
@@ -729,17 +798,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 }
             }else if (v.getId() == dislike.getId()){
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.DISLIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
@@ -761,7 +842,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
                             Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
@@ -848,17 +929,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
             if (v.getId() == like.getId()) {
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.LIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
@@ -892,17 +985,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 }
             }else if (v.getId() == dislike.getId()){
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.DISLIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
@@ -924,7 +1029,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
                             Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
@@ -953,6 +1058,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         private TextView likeCount;
         private final ImageView like;
         private final ImageView dislike;
+        private final Button play;
         PostDTO postDTO;
         PostController postController;
 
@@ -961,9 +1067,11 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             listenerRef = new WeakReference<>(listener);
             title = view.findViewById(R.id.title);
             author = view.findViewById(R.id.author);
+            play =  view.findViewById(R.id.play);
             likeCount = view.findViewById(R.id.likeCount);
             like = view.findViewById(R.id.imageView4);
             dislike = view.findViewById(R.id.imageView3);
+            play.setOnClickListener(this);
             like.setOnClickListener(this);
             dislike.setOnClickListener(this);
             view.setOnClickListener(this);
@@ -996,19 +1104,37 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         @Override
         public void onClick(View v) {
             postController = RetrofitUtils.getInstance().getRetrofit().create(PostController.class);
-            if (v.getId() == like.getId()) {
+            if (v.getId() == play.getId()){
+//                Intent i = new Intent(v.getContext(), PlayOffPlayActivity.class);
+//                i.putExtra("id", postDTO.getId());
+//                i.putExtra("from", "Feed");
+//                v.getContext().startActivity(i);
+                listenerRef.get().onPositionClicked(getAdapterPosition());
+            }else if (v.getId() == like.getId()) {
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.LIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
@@ -1042,17 +1168,29 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 }
             }else if (v.getId() == dislike.getId()){
                 if(postDTO.getLikeStatus() != null) {
-                    if ((!postDTO.getLikeStatus().equals(LikeStatus.DISLIKE)) || (postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
                         postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(postDTO.getLikeStatus() != null) {
-                                    if (postDTO.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
@@ -1074,7 +1212,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
                             Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 

@@ -52,9 +52,9 @@ public class PostDisplay extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String from = extras.getString("from");
 
-        PostDTO post = (PostDTO) extras.getSerializable("post");
-        title.setText(post.getTitle());
-        likeCount.setText(String.valueOf(post.getLikesCount().intValue()));
+        PostDTO postDTO = (PostDTO) extras.getSerializable("post");
+        title.setText(postDTO.getTitle());
+        likeCount.setText(String.valueOf(postDTO.getLikesCount().intValue()));
 
         button.setOnClickListener(v -> {
             if(from.equals("CommunityDisplay")) {
@@ -76,8 +76,8 @@ public class PostDisplay extends AppCompatActivity {
             }
         });
 
-        if(post.getLikeStatus() != null){
-            switch (post.getLikeStatus()){
+        if(postDTO.getLikeStatus() != null){
+            switch (postDTO.getLikeStatus()){
                 case LIKE:
                     likeCount.setTextColor(Color.parseColor("#205072"));
                     like.setImageResource(R.drawable.fnh);
@@ -93,23 +93,35 @@ public class PostDisplay extends AppCompatActivity {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(post.getLikeStatus() != null) {
-                    if ((!post.getLikeStatus().equals(LikeStatus.LIKE)) || (post.getLikeStatus().equals(LikeStatus.DISLIKE))) {
-                        postController.like(post.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
+                if(postDTO.getLikeStatus() != null) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.LIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(post.getLikeStatus() != null) {
-                                    if (post.getLikeStatus().equals(LikeStatus.DISLIKE))
-                                        tmp = tmp + 1;
-                                }
-                                tmp = tmp + 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp - 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                like.setImageResource(R.drawable.onh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Unlike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Like Error", t.getMessage(), t);
+                            }
+                        });
+                    }else{
+                        postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp + 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 like.setImageResource(R.drawable.fnh);
                                 dislike.setImageResource(R.drawable.obh);
-                                post.setLikeStatus(LikeStatus.LIKE);
-                                Log.i("Like: " + post.getId().intValue(), response.raw().request().headers().toString());
+                                postDTO.setLikeStatus(LikeStatus.LIKE);
+                                Log.i("Like: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                             }
 
                             @Override
@@ -119,15 +131,15 @@ public class PostDisplay extends AppCompatActivity {
                         });
                     }
                 }else{
-                    postController.like(post.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
+                    postController.like(postDTO.getId().intValue(), LikeStatus.LIKE).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             int tmp = Integer.parseInt(likeCount.getText().toString());
                             likeCount.setText(String.valueOf(tmp + 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             like.setImageResource(R.drawable.fnh);
-                            post.setLikeStatus(LikeStatus.LIKE);
-                            Log.i("Like: " + post.getId().intValue(), response.raw().request().headers().toString());
+                            postDTO.setLikeStatus(LikeStatus.LIKE);
+                            Log.i("Like: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
                         @Override
@@ -142,23 +154,35 @@ public class PostDisplay extends AppCompatActivity {
         dislike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(post.getLikeStatus() != null) {
-                    if ((!post.getLikeStatus().equals(LikeStatus.DISLIKE)) || (post.getLikeStatus().equals(LikeStatus.LIKE))) {
-                        postController.like(post.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
+                if(postDTO.getLikeStatus() != null) {
+                    if ((postDTO.getLikeStatus().equals(LikeStatus.DISLIKE))) {
+                        postController.like(postDTO.getId().intValue(), LikeStatus.UNSET).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 int tmp = Integer.parseInt(likeCount.getText().toString());
-                                if(post.getLikeStatus() != null) {
-                                    if (post.getLikeStatus().equals(LikeStatus.LIKE))
-                                        tmp = tmp - 1;
-                                }
-                                tmp = tmp - 1;
-                                likeCount.setText(String.valueOf(tmp));
+                                likeCount.setText(String.valueOf(tmp + 1));
+                                likeCount.setTextColor(Color.parseColor("#329D9C"));
+                                dislike.setImageResource(R.drawable.obh);
+                                postDTO.setLikeStatus(null);
+                                Log.i("Undislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.e("Undislike Error ", t.getMessage(), t);
+                            }
+                        });
+                    }else{
+                        postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int tmp = Integer.parseInt(likeCount.getText().toString());
+                                likeCount.setText(String.valueOf(tmp - 2));
                                 likeCount.setTextColor(Color.parseColor("#205072"));
                                 dislike.setImageResource(R.drawable.fbh);
                                 like.setImageResource(R.drawable.onh);
-                                post.setLikeStatus(LikeStatus.DISLIKE);
-                                Log.i("Dislike: " + post.getId().intValue(), response.raw().request().headers().toString());
+                                postDTO.setLikeStatus(LikeStatus.DISLIKE);
+                                Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                             }
 
                             @Override
@@ -168,15 +192,15 @@ public class PostDisplay extends AppCompatActivity {
                         });
                     }
                 }else{
-                    postController.like(post.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
+                    postController.like(postDTO.getId().intValue(), LikeStatus.DISLIKE).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             int tmp = Integer.parseInt(likeCount.getText().toString());
                             likeCount.setText(String.valueOf(tmp - 1));
                             likeCount.setTextColor(Color.parseColor("#205072"));
                             dislike.setImageResource(R.drawable.fbh);
-                            post.setLikeStatus(LikeStatus.LIKE);
-                            Log.i("Dislike: " + post.getId().intValue(), response.raw().request().headers().toString());
+                            postDTO.setLikeStatus(LikeStatus.DISLIKE);
+                            Log.i("Dislike: " + postDTO.getId().intValue(), response.raw().request().headers().toString());
                         }
 
                         @Override
@@ -188,30 +212,30 @@ public class PostDisplay extends AppCompatActivity {
             }
         });
 
-        switch (post.getType()){
+        switch (postDTO.getType()){
             case TEXT:
-                TextPostDTO textPostDTO = ((TextPostDTO) post);
+                TextPostDTO textPostDTO = ((TextPostDTO) postDTO);
                 displayFirstView(textPostDTO.getContent());
                 break;
             case IMAGE:
-                ImagePostDTO imagePostDTO = ((ImagePostDTO) post);
+                ImagePostDTO imagePostDTO = ((ImagePostDTO) postDTO);
                 name.setText("Image Post");
                 displaySecondView(imagePostDTO.getDescription(), imagePostDTO.getUrl());
                 break;
             case PETITION:
-                PetitionPostDTO petitionPostDTO = ((PetitionPostDTO) post);
+                PetitionPostDTO petitionPostDTO = ((PetitionPostDTO) postDTO);
                 name.setText("Petition Post");
                 displayThirdView(petitionPostDTO.getId().intValue(),
                         petitionPostDTO.getDescription(),
                         petitionPostDTO.getMediaUrl());
                 break;
             case VOTE:
-                VotingPostDTO votingPostDTO = ((VotingPostDTO) post);
+                VotingPostDTO votingPostDTO = ((VotingPostDTO) postDTO);
                 name.setText("Voting Post");
                 displayForthView(votingPostDTO.getId().intValue());
                 break;
             case PLAYOFF:
-                PlayOffPostDTO playOffPostDTO = ((PlayOffPostDTO) post);
+                PlayOffPostDTO playOffPostDTO = ((PlayOffPostDTO) postDTO);
                 name.setText("Play-Off Post");
                 communityDTO = ((CommunityDTO) extras.getSerializable("community"));
                 if(communityDTO != null) displayFifthView(playOffPostDTO.getId().intValue(), from, communityDTO);

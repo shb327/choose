@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.github.kishan2612:Material-Backdrop-Android:v1.1.0'
     implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation files('libs/battle4j-1.0-SNAPSHOT.jar')
     testImplementation 'junit:junit:4.+'
     implementation 'androidx.multidex:multidex:2.0.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -1,5 +1,7 @@
 package com.example.choose.home;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,7 @@ import com.example.choose.post.PostDisplay;
 import com.example.choose.recyclers.ClickListener;
 import com.example.choose.recyclers.FeedAdapter;
 import com.example.choose.retrofit.RetrofitUtils;
+import com.example.choose.start.StartingActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -114,6 +117,13 @@ public class FeedFragment extends Fragment implements NavigationView.OnNavigatio
         toggle.syncState();
 
         NavigationView navigationView = inflate.findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        TextView name = header.findViewById(R.id.username);
+        String accountName = RetrofitUtils.getInstance().getUsername();
+        if(accountName.contains("@"))
+            for (int i = 0; i < accountName.length(); i++)
+                if (accountName.charAt(i) == '@') accountName = accountName.substring(0,i);
+        name.setText(accountName);
         setNavigationViewListener(inflate);
 
         recyclerView.setAdapter(adapter);
@@ -178,9 +188,11 @@ public class FeedFragment extends Fragment implements NavigationView.OnNavigatio
                 startActivity(intent);
                 break;
             case R.id.logout:
+                Intent logoutIntent = new Intent(getContext(), StartingActivity.class);
+                RetrofitUtils.getInstance().deleteAccountManager(AccountManager.get(getContext()));
+                startActivity(logoutIntent);
                 break;
         }
-
         return true;
     }
 }

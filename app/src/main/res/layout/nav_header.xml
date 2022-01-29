@@ -73,22 +73,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
-<!--        <com.google.android.material.button.MaterialButton-->
-<!--            android:id="@+id/share"-->
-<!--            style="@style/Widget.App.Button.OutlinedButton.Icon"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            app:icon="@drawable/ic_round_close_24"-->
-<!--            app:iconGravity="textStart"-->
-<!--            app:iconSize="20dp"-->
-<!--            app:iconTint="#329D9C"-->
-<!--            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"-->
-<!--            app:strokeColor="#329D9C"-->
-<!--            android:layout_marginEnd="12dp"-->
-<!--            android:layout_marginTop="18dp"-->
-<!--            app:layout_anchor="@+id/nestedScrollView"-->
-<!--            app:layout_anchorGravity="end|top"/>-->
-
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="52dp"

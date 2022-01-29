@@ -111,10 +111,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         @Override
         public void onClick(View v) {
             if (v.getId() == share.getId()) {
-//                Intent i = new Intent(v.getContext(), PostDisplay.class);
-//                i.putExtra("post", localDataSet.get(getAdapterPosition()));
-//                i.putExtra("from", "PostFragment");
-//                v.getContext().startActivity(i);
                 ShareDialogFragment dialog = new ShareDialogFragment(localDataSet.get(getAdapterPosition()).getId().intValue());
                 dialog.show(FragmentManager.findFragment(v).getFragmentManager(), "MyCustomDialog");
             }else if (v.getId() == delete.getId()) {

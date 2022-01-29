@@ -105,7 +105,7 @@
                         android:textColor="#205072" />
 
                     <Button
-                        android:id="@+id/signature"
+                        android:id="@+id/play"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"

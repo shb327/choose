@@ -3,6 +3,7 @@ package com.example.choose.create;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,11 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.choose.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class PlayOffChooseFragment extends Fragment {
 
@@ -49,7 +57,6 @@ public class PlayOffChooseFragment extends Fragment {
         isReady = false;
 
         Button continueBtn = inflate.findViewById(R.id.continueBtn);
-
         View view = getActivity().findViewById(R.id.off_container);
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +72,7 @@ public class PlayOffChooseFragment extends Fragment {
                     return;
                 }
                 if(rb1.isChecked()){
-                    setNumber(8);
+                    setNumber(2);
                 }else if(rb2.isChecked()){
                     setNumber(16);
                 }else if(rb3.isChecked()){
@@ -77,7 +84,6 @@ public class PlayOffChooseFragment extends Fragment {
                 }else if(rb6.isChecked()){
                     setNumber(256);
                 }
-
                 setReady(true);
                 view.callOnClick();
             }

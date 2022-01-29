@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.choose.R;
 import com.example.choose.api.PostController;
+import com.example.choose.community.CreateCommunityActivity;
 import com.example.choose.dto.GetFeedRequestDTO;
 import com.example.choose.dto.GetFeedResponseDTO;
 import com.example.choose.post.PostDisplay;
@@ -28,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PersonalPageFragment extends Fragment {
-
     private TextView welcome;
     private RecyclerView recyclerView;
     PostController postController;
@@ -71,10 +72,29 @@ public class PersonalPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         recyclerView = view.findViewById(R.id.content_recycle_view);
-
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
+
+        Button manage = view.findViewById(R.id.manage);
+        Button create = view.findViewById(R.id.create);
+
+        manage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), SettingsActivity.class);
+                i.putExtra("from", "Edit");
+                startActivity(i);
+            }
+        });
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), CreateCommunityActivity.class));
+            }
+        });
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

@@ -63,7 +63,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginTop="92dp"
         android:fontFamily="@font/montserrat"
-        android:text="Your target for today is to keep positive mindset and smile to everyone you meet."
+        android:text="Feel like your ideas need more attention? Here are some community actions:"
         android:textColor="#68B2A0"
         android:textSize="16sp"
         app:layout_anchor="@+id/nestedScrollView"
@@ -92,29 +92,29 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/textButton1"
+        android:id="@+id/manage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="150dp"
         android:backgroundTint="#205072"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Liked"
+        android:text="Manage"
         android:textColor="@color/white"
         app:cornerRadius="14dp"
-        app:icon="@drawable/ic_round_like_24" />
+        app:icon="@drawable/ic_round_space_dashboard_24" />
 
     <Button
-        android:id="@+id/textButton2"
+        android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="142dp"
+        android:layout_marginLeft="174dp"
         android:layout_marginTop="150dp"
         android:backgroundTint="#329D9C"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Saved"
+        android:text="Create"
         android:textColor="@color/white"
         app:cornerRadius="14dp"
-        app:icon="@drawable/ic_icon_24" />
+        app:icon="@drawable/ic_round_create_24" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
