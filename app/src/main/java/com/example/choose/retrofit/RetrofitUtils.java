@@ -35,7 +35,8 @@ public class RetrofitUtils {
     }
 
     public void updateRetrofit() {
-        Gson gson = new GsonBuilder().registerTypeAdapter(PostDTO.class, new PostDTODeserializer()).create();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(PostDTO.class, new PostDTODeserializer()).create();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://choose.teheidoma.com/")
@@ -58,7 +59,8 @@ public class RetrofitUtils {
     private String getAuthHeader() {
         Account account = accountManager.getAccountsByType(TYPE_ACCOUNT)[0];
         String value = account.name + ":" + accountManager.getPassword(account);
-        return "Basic " + Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.US_ASCII));
+        String str = Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.US_ASCII));
+        return "Basic " + str;
     }
 
     public boolean hasLogin() {
@@ -70,7 +72,8 @@ public class RetrofitUtils {
     }
 
     public void deleteAccountManager(AccountManager accountManager) {
-        accountManager.removeAccount(accountManager.getAccountsByType(TYPE_ACCOUNT)[0], null, null);
+        accountManager.removeAccount(
+                accountManager.getAccountsByType(TYPE_ACCOUNT)[0], null, null);
     }
 
     public void login(String login, String password) {

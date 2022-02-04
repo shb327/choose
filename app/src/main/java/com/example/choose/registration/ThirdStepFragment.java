@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.choose.R;
+import com.example.choose.login.LoginActivity;
 import com.example.choose.retrofit.RetrofitUtils;
 import com.example.choose.api.LoginController;
 import com.example.choose.api.RegistrationController;
@@ -214,10 +215,12 @@ public class ThirdStepFragment extends Fragment {
                         .enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                Log.i("post", response.raw().request().headers().toString());
-                                if (response.code() == 200) {
+                                if (response.code() == 200 || response.code() == 302) {
+                                    utils.login(username, password);
+                                    utils.updateRetrofit();
                                     startActivity(new Intent(context, HomeActivity.class));
                                 }
+                                Log.i("Login", response.raw().request().headers().toString());
                             }
 
                             @Override

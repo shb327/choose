@@ -8,13 +8,12 @@ import com.example.choose.dto.GetFeedRequestDTO;
 import com.example.choose.dto.GetFeedResponseDTO;
 import com.example.choose.dto.GetUserFeedRequestDTO;
 import com.example.choose.dto.LikeStatus;
-import com.example.choose.dto.PlayOffOptionDTO;
-import com.example.choose.dto.PlayOffRequestOptionDTO;
 import com.example.choose.dto.PostDTO;
 
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -53,8 +52,8 @@ public interface PostController {
 
     @Multipart
     @POST("/api/posts/create/playoff")
-    Call<PostDTO> createPlayoffPost(@Part("title")String title,
-                                    @Part("options")List<String> options,
+    Call<PostDTO> createPlayoffPost(@Part("title")RequestBody title,
+                                    @Part("options")RequestBody options,
                                     @Part List<MultipartBody.Part> files);
 
     @POST("/api/posts/create/voting")

@@ -68,9 +68,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showFragment(Fragment fragment, int position) {
-        FragmentTransaction mTransactiont = getSupportFragmentManager().beginTransaction();
-        mTransactiont.replace(R.id.main_container, fragment, fragment.getClass().getName());
-        mTransactiont.commit();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, fragment, fragment.getClass().getName());
+        transaction.commit();
     }
 
     public void displayView(int position) {
