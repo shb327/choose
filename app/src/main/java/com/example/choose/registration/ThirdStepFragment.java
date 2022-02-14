@@ -1,7 +1,9 @@
 package com.example.choose.registration;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -78,97 +81,54 @@ public class ThirdStepFragment extends Fragment {
 
         error = view.findViewById(R.id.errortext);
 
-        one.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                cardOne.setErrorEnabled(false);
-                cardOne.setError(null);
-                one.setTextColor(Color.parseColor("#56C596"));
-                cardTwo.setErrorEnabled(false);
-                cardTwo.setError(null);
-                two.setTextColor(Color.parseColor("#56C596"));
-                cardThree.setErrorEnabled(false);
-                cardThree.setError(null);
-                three.setTextColor(Color.parseColor("#56C596"));
-                cardFour.setErrorEnabled(false);
-                cardFour.setError(null);
-                four.setTextColor(Color.parseColor("#56C596"));
-                error.setTextColor(Color.WHITE);
-            }
-        });
+        /* Assign the TextViews in the array in the order in which you want to shift focus */
+        TextInputEditText[] fields = {one, two, three, four};
 
-        two.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                cardOne.setErrorEnabled(false);
-                cardOne.setError(null);
-                one.setTextColor(Color.parseColor("#56C596"));
-                cardTwo.setErrorEnabled(false);
-                cardTwo.setError(null);
-                two.setTextColor(Color.parseColor("#56C596"));
-                cardThree.setErrorEnabled(false);
-                cardThree.setError(null);
-                three.setTextColor(Color.parseColor("#56C596"));
-                cardFour.setErrorEnabled(false);
-                cardFour.setError(null);
-                four.setTextColor(Color.parseColor("#56C596"));
-                error.setTextColor(Color.WHITE);
-            }
-        });
+        for (TextInputEditText currfield : fields) {
+            currfield.addTextChangedListener(new TextWatcher() {
 
-        three.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                cardOne.setErrorEnabled(false);
-                cardOne.setError(null);
-                one.setTextColor(Color.parseColor("#56C596"));
-                cardTwo.setErrorEnabled(false);
-                cardTwo.setError(null);
-                two.setTextColor(Color.parseColor("#56C596"));
-                cardThree.setErrorEnabled(false);
-                cardThree.setError(null);
-                three.setTextColor(Color.parseColor("#56C596"));
-                cardFour.setErrorEnabled(false);
-                cardFour.setError(null);
-                four.setTextColor(Color.parseColor("#56C596"));
-                error.setTextColor(Color.WHITE);
-            }
-        });
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
 
-        four.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void afterTextChanged(Editable editable) {
-                cardOne.setErrorEnabled(false);
-                cardOne.setError(null);
-                one.setTextColor(Color.parseColor("#56C596"));
-                cardTwo.setErrorEnabled(false);
-                cardTwo.setError(null);
-                two.setTextColor(Color.parseColor("#56C596"));
-                cardThree.setErrorEnabled(false);
-                cardThree.setError(null);
-                three.setTextColor(Color.parseColor("#56C596"));
-                cardFour.setErrorEnabled(false);
-                cardFour.setError(null);
-                four.setTextColor(Color.parseColor("#56C596"));
-                error.setTextColor(Color.WHITE);
-            }
-        });
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    nextEdittext().requestFocus();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    one.setTextColor(Color.parseColor("#56C596"));
+
+                    two.setTextColor(Color.parseColor("#56C596"));
+
+                    three.setTextColor(Color.parseColor("#56C596"));
+
+                    four.setTextColor(Color.parseColor("#56C596"));
+
+                    cardOne.setErrorEnabled(false);
+                    one.setTextColor(Color.parseColor("#56C596"));
+                    cardTwo.setErrorEnabled(false);
+                    two.setTextColor(Color.parseColor("#56C596"));
+                    cardThree.setErrorEnabled(false);
+                    three.setTextColor(Color.parseColor("#56C596"));
+                    cardFour.setErrorEnabled(false);
+                    four.setTextColor(Color.parseColor("#56C596"));
+
+                    error.setTextColor(Color.WHITE);
+                    error.setText("Please double-check your verification code");
+                }
+
+                public TextInputEditText nextEdittext() {
+                    int i;
+                    for (i = 0; i < fields.length - 1; i++) {
+                        if (fields[i] == currfield)
+                            return fields[i + 1];
+                    }
+                    return fields[i];
+                }
+            });
+        }
     }
 
     public void send(ViewPager viewPager, LoginController controller, String username, String password, Context context){
@@ -181,45 +141,47 @@ public class ThirdStepFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (one.getText().length() == 0 || two.getText().length() == 0 || three.getText().length() == 0 || four.getText().length() == 0) {
                     cardOne.setErrorEnabled(true);
-                    cardOne.setError("1");
                     one.setTextColor(Color.parseColor("#F75010"));
+
                     cardTwo.setErrorEnabled(true);
-                    cardTwo.setError("2");
                     two.setTextColor(Color.parseColor("#F75010"));
+
                     cardThree.setErrorEnabled(true);
-                    cardThree.setError("3");
                     three.setTextColor(Color.parseColor("#F75010"));
+
                     cardFour.setErrorEnabled(true);
-                    cardFour.setError("4");
                     four.setTextColor(Color.parseColor("#F75010"));
-                    error.setText("Please provide some Input for all four Fields");
+
+                    error.setText("Please provide some input for all four fields");
                     error.setTextColor(Color.parseColor("#F75010"));
+
                     return;
                 }else if(response.code() == 500){
                     cardOne.setErrorEnabled(true);
-                    cardOne.setError("1");
                     one.setTextColor(Color.parseColor("#F75010"));
+
                     cardTwo.setErrorEnabled(true);
-                    cardTwo.setError("2");
                     two.setTextColor(Color.parseColor("#F75010"));
+
                     cardThree.setErrorEnabled(true);
-                    cardThree.setError("3");
                     three.setTextColor(Color.parseColor("#F75010"));
+
                     cardFour.setErrorEnabled(true);
-                    cardFour.setError("4");
                     four.setTextColor(Color.parseColor("#F75010"));
+
+                    error.setText("Please, double-check your verification code");
                     error.setTextColor(Color.parseColor("#F75010"));
+
                     return;
                 }
                 controller.login(username, password)
                         .enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.code() == 200 || response.code() == 302) {
-                                    utils.login(username, password);
-                                    utils.updateRetrofit();
-                                    startActivity(new Intent(context, HomeActivity.class));
-                                }
+                                utils.login(username, password);
+                                utils.updateRetrofit();
+                                startActivity(new Intent(context, HomeActivity.class));
+
                                 Log.i("Login", response.raw().request().headers().toString());
                             }
 

@@ -62,6 +62,7 @@ public class PlayOffSelectFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate =  inflater.inflate(R.layout.fragment_play_off_select, container, false);
         items = (RecyclerView) inflate.findViewById(R.id.recycler);
+        assert getArguments() != null;
         myListItems = MyListItem.createContactsList(getArguments().getInt("choice"));
         postTitle = getArguments().getString("title");
         adapter = new MyRecyclerViewAdapter(myListItems, this);
